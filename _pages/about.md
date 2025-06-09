@@ -1,17 +1,9 @@
 ---
-layout: default
-title: "About"
-permalink: /about/
+layout: page
+title: About
+permalink: /about
 ---
 
-# About Me
+*This is an about page.*
 
-Write your about content here. This page will have the same navigation as every other page.
-
-You can include:
-- Your background
-- What you do
-- Your interests
-- Contact information
-
-The dark mode aesthetic and navigation will automatically appear on this page.
+Feel free to tell the world about what you love! 😍
