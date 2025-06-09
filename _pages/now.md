@@ -7,6 +7,6 @@ permalink: /now
 
 ## Designing systems for exploring the unknown
 
-I’m the Director of [[talk.art.therapy.]] which is an Art Therapy blah blah:
+I’m the Director of [[Talk.Art.Therapy.]] which is an Art Therapy blah blah:
 
 - [[Social Meditation]]
