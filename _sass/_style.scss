@@ -157,11 +157,28 @@ a {
     text-decoration-color: var(--color-highlight);
   }
 
+  /* External links get arrow and italic styling */
   &:after {
-    content: "";
+    content: "↗";
+    position: relative;
+    top: -0.3em;
+    font-size: 0.7em;
+    color: var(--color-warm-gray);
+    margin-left: 0.1em;
   }
 
-  &.internal-link:after,
+  /* External links are italic */
+  font-style: italic;
+
+  /* Internal links: no arrow, no italic */
+  &.internal-link {
+    font-style: normal;
+    
+    &:after {
+      content: "";
+    }
+  }
+
   &.footnote:after,
   &.reversefootnote:after {
     content: "";
