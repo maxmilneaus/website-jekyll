@@ -235,14 +235,23 @@ li {
   color: var(--color-cream);
 }
 
-/* Time elements - warm and subtle */
+/* Time elements - consistent styling across pages and notes */
 time {
   display: block;
   color: var(--color-warm-gray);
-  margin: 0.5em 0 1em;
-  font-size: 0.9rem;
+  margin: 0.5em 0 1.5em;
+  font-size: 0.85rem;
   font-weight: var(--font-weight-medium);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
+}
+
+/* Article headers - clean spacing */
+article {
+  margin-bottom: var(--space-lg);
+}
+
+article h1 {
+  margin-bottom: var(--space-sm);
 }
 
 /* Images - warm presentation */
@@ -296,10 +305,7 @@ pre {
   margin: var(--space-md) 0 var(--space-lg) 0;
 }
 
-/* Grid layouts - removed constraints for full-width notes */
-#notes-entry-container {
-  /* No grid constraints - let content take full width like pages */
-}
+/* Layout consistency - removed old grid constraints */
 
 .backlink-box {
   background: transparent;
@@ -325,25 +331,37 @@ pre {
   cursor: help;
 }
 
-/* Latest posts styling - clean, no animations */
-.latest-posts ul {
-  list-style: none;
-  padding: 0;
+/* Latest posts styling - clean, minimal, aligned */
+.latest-posts {
   margin: var(--space-lg) 0 var(--space-xl) 0;
 }
 
+.latest-posts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .latest-posts li {
-  padding: var(--space-sm) 0;
   display: flex;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   align-items: baseline;
-  margin: var(--space-sm) 0;
+  margin: 0 0 var(--space-md) 0;
+  padding: var(--space-xs) 0;
 }
 
 .latest-posts time {
   flex-shrink: 0;
-  min-width: 5rem;
+  min-width: 3.5rem;
   font-size: 0.85rem;
   color: var(--color-warm-gray);
-  font-variant-numeric: tabular-nums; /* Aligned numbers for clean column */
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.02em;
+  display: inline;
+  margin: 0;
+}
+
+.latest-posts span {
+  color: var(--color-cream);
 }
