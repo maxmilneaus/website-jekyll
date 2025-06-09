@@ -105,11 +105,14 @@ a {
 }
 
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 1rem 0;
   margin: 1em 0 3em;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .nav-links {
