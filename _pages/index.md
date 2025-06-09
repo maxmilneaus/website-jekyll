@@ -4,7 +4,6 @@ title: Home
 id: home
 permalink: /
 ---
-
 ### Latest
 
 <ul>
