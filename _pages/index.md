@@ -11,7 +11,7 @@ permalink: /
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
   {% for note in recent_notes limit: 5 %}
     <li>
-      <time>{{ note.last_modified_at | date: "%Y-%m-%d" }}</time>
+      <time>{{ note.last_modified_at | date: "%Y %b" }}</time>
       <span>— <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a></span>
     </li>
   {% endfor %}
@@ -38,7 +38,7 @@ permalink: /
   
   .latest-posts time {
     flex-shrink: 0;
-    min-width: 6rem;
+    min-width: 5rem;
     font-variant-numeric: tabular-nums;
     color: var(--color-warm-gray);
     font-size: 0.9rem;
