@@ -5,6 +5,8 @@ id: Max Milne Photography - Note
 permalink: /Max Milne Photography - Note
 ---
 THE TEST!
-![[website-jekyll/_site/assets/DSM example.jpg]]
+
+![Hey!([[Website/assets/DSM example.jpg]]) 
+![[Website/_site/assets/DSM example.jpg]]
 [[DSM.jpg]]
 ![[DSM.jpg]]

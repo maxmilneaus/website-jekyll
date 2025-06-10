@@ -92,7 +92,7 @@ h3 {
   color: var(--color-warm-gray);
   margin-top: var(--space-xl);
   /* Slightly different spacing rhythm for h3s */
-  margin-bottom: calc(var(--space-md) * 0.75);
+  margin-bottom: calc(var(--space-md) * 1);
 }
 
 /* Contextual spacing - paragraphs after headings get less top margin */
@@ -121,7 +121,7 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: var(--space-md); /* Adjusted gap for tighter spacing */
+  gap: 1(--space-md); /* Adjusted gap for tighter spacing */
 }
 
 .nav-links a {
@@ -334,34 +334,101 @@ pre {
   cursor: help;
 }
 
-/* Latest posts styling - clean, minimal, aligned */
-.latest-posts ul {
+/* REFINED ARTICLE LIST (now targeting h3 + ul) */
+ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.latest-posts li { margin-bottom: 0.3rem; }
-.latest-posts a {
+ul li {
+  margin: 0 0 0.0rem 0; /* CORRECTED: This resets top/right/left margins and sets a tight bottom margin, fixing the spacing bug. */
+}
+ul a {
   display: grid;
-  grid-template-columns: auto auto 1fr;
-  gap: 0.5rem;
+  grid-template-columns: auto auto 1fr; /* 3 columns: Date | Separator | Title */
+  gap: 0.25rem;
   align-items: baseline;
   text-decoration: none;
-  padding: 0.2rem 0;
+  padding: 0.0rem 0;
 }
-.latest-posts a:hover .article-title {
+/* This rule now ONLY targets the title for hover */
+ul a:hover .article-title {
   color: var(--color-accent-hover);
   text-decoration-color: var(--color-accent-hover);
 }
 .article-date {
   font-family: var(--font-mono);
-  color: var(--color-accent-hover);
+  color: var(--color-accent-hover); /* Date is light blue by default */
   font-size: 0.9em;
+  margin-right: .5rem;
 }
-.article-separator { color: var(--color-stone); }
+.article-separator {
+  color: var(--color-stone);
+  margin-right: .5rem;
+}
 .article-title {
   color: var(--color-cream);
   text-decoration: underline;
   text-decoration-color: var(--color-stone);
   transition: color 200ms ease, text-decoration-color 200ms ease;
+}
+
+/* --- PROJECTS PAGE GRID --- */
+.projects-grid {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-xl) 0;
+  display: grid;
+  grid-template-columns: 1fr; /* 1 column on mobile */
+  gap: var(--space-lg);
+}
+
+/* On larger screens, switch to a 2-column grid */
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  display: block; /* Makes the entire card a clickable area */
+  text-decoration: none;
+  color: var(--color-cream);
+  background-color: var(--color-charcoal);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--border-radius);
+  transition: transform 200ms ease, border-color 200ms ease;
+  overflow: hidden; /* Ensures image corners are rounded */
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent-hover);
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--color-graphite);
+  margin: 0;
+  border-radius: 0; /* Image itself has no radius */
+}
+
+.project-card-content {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.project-card h3 {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 1.25rem;
+  color: var(--color-cream);
+}
+
+.project-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-warm-gray);
+  line-height: 1.6;
 }

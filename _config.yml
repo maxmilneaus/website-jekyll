@@ -32,6 +32,9 @@ collections:
     output: true
     permalink: /:slug
 
+  projects:
+    output: true
+
 defaults:
   - scope:
       path: "**/*"

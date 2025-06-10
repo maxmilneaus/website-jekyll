@@ -6,7 +6,6 @@ permalink: /
 ---
 ### Latest
 
-<div class="latest-posts">
   <ul>
     {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
     {% for note in recent_notes limit: 10 %}
@@ -19,7 +18,4 @@ permalink: /
     </li>
     {% endfor %}
   </ul>
-</div>
-
-
 
