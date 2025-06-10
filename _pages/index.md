@@ -32,18 +32,18 @@ permalink: /
   
   .latest-posts li {
     display: flex;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     align-items: baseline;
-    margin: 0 0 var(--space-md) 0;
-    padding: var(--space-xs) 0;
+    margin: 0 0 var(--space-lg) 0;
+    padding: var(--space-sm) 0;
   }
   
   .latest-posts time {
     flex-shrink: 0;
     min-width: 3.5rem;
     font-variant-numeric: tabular-nums;
-    color: var(--color-warm-gray);
-    font-size: 0.85rem;
+    color: var(--color-stone);
+    font-size: 0.8rem;
     font-weight: var(--font-weight-medium);
     letter-spacing: 0.02em;
     display: inline;
