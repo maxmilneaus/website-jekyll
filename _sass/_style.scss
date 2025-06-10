@@ -3,18 +3,21 @@
 
 :root {
   /* Warm, softer contrast palette with subtle blue accents */
-  --color-deep: #141210;              /* Slightly lighter warm black */
-  --color-charcoal: #201d1a;          /* Warmer, lighter charcoal */
-  --color-graphite: #2d2926;          /* Softer graphite */
-  --color-stone: #4a453f;             /* Warmer stone */
-  --color-cream: #e8ddd4;             /* Softer, less bright cream */
-  --color-warm-gray: #c7beb5;        /* Warmer, softer gray */
-  --color-highlight: #bfdbfe;         /* Soft blue highlight */
-  --color-highlight-glow: #93c5fd;    /* Gentle blue highlight glow */
-  --color-accent-subtle: #3b82f6;     /* Subtle blue accent */
+  /* Viola/Rams Color Palette */
+  --color-deep: #141210;              /* Background */
+  --color-charcoal: #201d1a;          /* Secondary backgrounds */
+  --color-graphite: #2d2926;          /* Borders, subtle elements */
+  --color-stone: #4a453f;             /* Dividers, stronger borders */
+  --color-cream: #e8ddd4;             /* Primary text */
+  --color-warm-gray: #c7beb5;        /* Secondary text, muted elements */
+
+  /* Viola/Rams Accent Colors */
+  --color-accent-base: #4343a2; /* Darker, subdued indigo for selection/borders */
+  --color-accent-hover: #818cf8; /* Lighter, bright indigo for hover states */
   
   /* Typography - cozy yet precise */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 600;
@@ -54,6 +57,10 @@ body {
 
   @media (max-width: 600px) {
     line-height: 1.65; /* Tighter on mobile for better rhythm */
+::selection {
+  background-color: var(--color-accent-base);
+  color: var(--color-cream);
+}
     padding: var(--space-lg) 4vw;
   }
 }
@@ -267,11 +274,11 @@ img {
 
 /* Blockquotes - subtle, spacious */
 blockquote {
-  border-left: 2px solid var(--color-accent-subtle);
   margin: var(--space-xl) 0;
   padding-left: var(--space-lg);
-  font-style: italic;
+  border-left: 2px solid var(--color-accent-base); /* Uses darker indigo */
   color: var(--color-warm-gray);
+  font-style: italic;
 
   p {
     margin: 0;
@@ -288,21 +295,50 @@ hr {
 }
 
 /* Code - warm, functional */
-code {
-  background: var(--color-charcoal);
-  color: var(--color-highlight);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--border-radius);
-  font-size: 0.9em;
+/* INLINE TEXT ELEMENTS */
+strong {
+  font-weight: var(--font-weight-bold);
+  color: white; /* Slightly brighter than cream for emphasis */
 }
 
+em {
+  font-style: italic;
+}
+
+mark {
+  background-color: var(--color-accent-base);
+  color: var(--color-cream);
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+}
+
+/* Inline code styling */
+code {
+  font-family: var(--font-mono);
+  background-color: var(--color-charcoal);
+  border: 1px solid var(--color-graphite);
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+  border-radius: 3px;
+  color: var(--color-warm-gray); /* Muted color for inline code */
+}
+
+/* Code blocks */
 pre {
   background: var(--color-charcoal);
-  color: var(--color-cream);
   padding: var(--space-md);
+  border: 1px solid var(--color-graphite);
   border-radius: var(--border-radius);
   overflow-x: auto;
   margin: var(--space-md) 0 var(--space-lg) 0;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1em;
+  color: var(--color-cream); /* Brighter text for code blocks */
 }
 
 /* Layout consistency - removed old grid constraints */
@@ -332,36 +368,42 @@ pre {
 }
 
 /* Latest posts styling - clean, minimal, aligned */
-.latest-posts {
-  margin: var(--space-lg) 0 var(--space-xl) 0;
-}
-
+/* REFINED ARTICLE LIST (was .latest-posts) */
 .latest-posts ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .latest-posts li {
-  display: flex;
-  gap: var(--space-lg);
+  margin-bottom: 0.75rem;
+}
+.latest-posts a {
+  display: grid;
+  grid-template-columns: auto auto 1fr; /* 3 columns: Date | Separator | Title */
+  gap: 0.75rem;
   align-items: baseline;
-  margin: 0 0 var(--space-md) 0;
+  text-decoration: none;
   padding: var(--space-xs) 0;
 }
-
-.latest-posts time {
-  flex-shrink: 0;
-  min-width: 3.5rem;
-  font-size: 0.85rem;
-  color: var(--color-warm-gray);
-  font-variant-numeric: tabular-nums;
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.02em;
-  display: inline;
-  margin: 0;
+.latest-posts a:hover .article-title,
+.latest-posts a:hover .article-date,
+.latest-posts a:hover .article-separator {
+  color: var(--color-accent-hover);
+  text-decoration-color: var(--color-accent-hover);
 }
-
-.latest-posts span {
+.article-date {
+  font-family: var(--font-mono);
+  color: var(--color-accent-base);
+  font-size: 0.9em;
+  transition: color 200ms ease;
+}
+.article-separator {
+  color: var(--color-stone);
+  transition: color 200ms ease;
+}
+.article-title {
   color: var(--color-cream);
+  text-decoration: underline;
+  text-decoration-color: var(--color-stone);
+  transition: color 200ms ease, text-decoration-color 200ms ease;
 }
