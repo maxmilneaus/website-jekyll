@@ -8,20 +8,17 @@ layout: default
 </article>
 
 <div class="projects-list">
-  {% assign projects_by_year = site.projects | group_by: 'year' | sort: 'name' | reverse %}
-  {% for year_group in projects_by_year %}
-    <section class="year-section">
-      <h2 class="year-header">{{ year_group.name }}</h2>
-      <ul class="project-items">
-        {% for project in year_group.items %}
-          <li class="project-item">
-            <a href="{{ project.url | relative_url }}" class="project-link">
-              <span class="project-title">{{ project.title }}</span>
-              <span class="project-description">{{ project.description }}</span>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </section>
+  {% assign sorted_projects = site.projects | sort: 'year' | reverse %}
+  {% assign sorted_projects = sorted_projects | sort: 'order' %}
+  {% for project in sorted_projects %}
+    <div class="project-entry">
+      <div class="project-year">{{ project.year }}—</div>
+      <div class="project-content">
+        <h3 class="project-title">
+          <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+        </h3>
+        <p class="project-description">{{ project.description }}</p>
+      </div>
+    </div>
   {% endfor %}
 </div>

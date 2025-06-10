@@ -162,8 +162,8 @@ a {
     text-decoration-color: var(--color-accent-hover);
   }
 
-  /* External links get arrow and italic styling */
-  &:after {
+  /* Only external links (not internal-link class, not same-site relative URLs) get arrow and italic styling */
+  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]):after {
     content: "↗";
     position: relative;
     top: -0.3em;
@@ -172,16 +172,9 @@ a {
     margin-left: 0.1em;
   }
 
-  /* External links are italic */
-  font-style: italic;
-
-  /* Internal links: no arrow, no italic */
-  &.internal-link {
-    font-style: normal;
-    
-    &:after {
-      content: "";
-    }
+  /* Only external links are italic */
+  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]) {
+    font-style: italic;
   }
 
   &.footnote:after,
