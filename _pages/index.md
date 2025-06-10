@@ -34,7 +34,7 @@ permalink: /
     display: flex;
     gap: var(--space-xl);
     align-items: baseline;
-    margin: 0 0 var(--space-lg) 0;
+    margin: 0 0 calc(var(--space-xl) * 1.5) 0;
     padding: var(--space-sm) 0;
   }
   
@@ -42,7 +42,7 @@ permalink: /
     flex-shrink: 0;
     min-width: 3.5rem;
     font-variant-numeric: tabular-nums;
-    color: var(--color-stone);
+    color: var(--color-graphite);
     font-size: 0.8rem;
     font-weight: var(--font-weight-medium);
     letter-spacing: 0.02em;
