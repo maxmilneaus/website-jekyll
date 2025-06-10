@@ -34,6 +34,7 @@ collections:
 
   projects:
     output: true
+    permalink: /projects/:name/
 
 defaults:
   - scope:
@@ -44,3 +45,7 @@ defaults:
       path: "_notes/**/*.md"
     values:
       layout: "note"
+  - scope:
+      path: "_projects/**/*.md"
+    values:
+      layout: "project"
