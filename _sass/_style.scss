@@ -47,14 +47,15 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  word-spacing: 0.05em;                       /* Steph-style subtle word spacing */
 
   @media (min-width: 820px) {
     font-size: 1.05rem;
-    line-height: 1.75; /* Slightly more generous for larger screens */
+    line-height: 1.75;
   }
 
   @media (max-width: 600px) {
-    line-height: 1.65; /* Tighter on mobile for better rhythm */
+    line-height: 1.65;
     padding: var(--space-lg) 4vw;
   }
 }
@@ -103,16 +104,16 @@ h1 + p, h2 + p, h3 + p {
 
 /* Latest Section - Steph Ango inspired design */
 .latest-section {
-  margin: var(--space-xl) 0;
+  margin: calc(var(--space-xl) * 1.25) 0 calc(var(--space-xl) * 1.5) 0;  /* More separation from nav */
 }
 
 .latest-label {
-  font-size: 1rem;
+  font-size: 1rem;                        /* Match other elements */
   font-weight: var(--font-weight-normal);
-  color: var(--color-meta);
+  color: var(--color-meta);               /* Same color as meta/preview */
   font-variant: normal;
-  letter-spacing: 0.05em;
-  margin-bottom: var(--space-sm); // Adjusted spacing
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
   text-decoration: none;
   display: block;
   
@@ -131,47 +132,48 @@ h1 + p, h2 + p, h3 + p {
 }
 
 .latest-title {
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-medium);
+  font-size: 1.35rem;                     /* Larger for better prominence */
+  font-weight: var(--font-weight-medium); /* Medium weight for better presence */
   color: var(--color-cream);
-  line-height: 1.3;
-  margin: 0 0 var(--space-xs) 0; // Adjusted spacing
-  transition: color 0.2s ease; // Added transition
+  line-height: 1.35;
+  margin: 0 0 var(--space-xs) 0;
+  transition: color 0.2s ease;
 }
 
 .latest-meta {
-  font-size: 0.875rem;
-  color: var(--color-meta);        /* Use new intermediate color */
-  margin-bottom: var(--space-md); // Adjusted spacing
+  font-size: 1rem;                        /* Match label and preview */
+  color: var(--color-meta);               /* Same color consistency */
+  margin-bottom: var(--space-sm);
 }
 
 .latest-preview {
-  color: var(--color-meta);
+  color: var(--color-meta);               /* Same color as label/meta */
+  font-size: 1rem;                       /* Match label and meta size */
   line-height: 1.6;
-  margin: 0; // Adjusted spacing
+  margin: 0 0 var(--space-md) 0;
 }
 
 .read-more {
-  display: inline; /* Changed to inline */
-  margin-top: 0; /* Removed margin-top */
+  display: inline;
+  margin-top: 0;
   color: var(--color-meta);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);      /* Normal weight like Steph */
   text-decoration: underline;
   text-underline-offset: 0.2em;
   transition: color 0.2s ease;
 
   &:hover {
-    color: var(--color-accent-hover);
+    color: var(--color-cream);                  /* Subtle hover like Steph */
   }
 }
 
 /* Section Labels - consistent styling across Latest, Topics, Writing */
 .section-label {
-  font-size: 1rem;
+  font-size: 0.9rem;                      /* Match latest-label size */
   font-weight: var(--font-weight-normal);
   color: var(--color-meta);
   font-variant: normal;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;                 /* Consistent letter spacing */
   margin-bottom: 0;
   text-decoration: none;
   display: block;
@@ -179,12 +181,12 @@ h1 + p, h2 + p, h3 + p {
 
 /* Topics Section */
 .topics-section {
-  margin: var(--space-xl) 0;
+  margin: var(--space-lg) 0;                      /* Consistent with latest section */
 }
 
 /* Writing Section */
 .writing-section {
-  margin: var(--space-xl) 0;
+  margin: var(--space-lg) 0;                      /* Consistent spacing */
 }
 
 .topics-list {
@@ -236,8 +238,8 @@ p {
 
 /* Navigation - minimal, Steph-inspired */
 nav {
-  margin: 0 0 var(--space-xl) 0;    /* Remove top margin, increase bottom */
-  padding: 0;                       /* Remove padding for cleaner alignment */
+  margin: 0 0 0 0;                 /* Remove bottom margin for tighter spacing to Latest */
+  padding: 0;
 
   > div {
     display: flex;
@@ -351,6 +353,7 @@ footer {
   margin: var(--space-xl) 0 var(--space-lg) 0;
   padding: var(--space-lg) 0;
   border-top: 1px solid var(--color-stone);
+  opacity: 0.6;                              /* Match HR opacity */
   color: var(--color-warm-gray);
   font-size: 0.9rem;
 }
@@ -418,8 +421,9 @@ hr {
   width: 100%;
   border: 0;
   height: 1px;
-  margin: var(--space-xl) 0;
-  background: var(--color-stone);
+  margin: var(--space-lg) 0 var(--space-xl) 0;
+  background: var(--color-stone);             /* Same color as latest section HR */
+  opacity: 0.6;                              /* Consistent opacity throughout */
 }
 
 /* Code - warm, functional */
@@ -505,6 +509,7 @@ ul a:hover .article-title {
   color: var(--color-cream);
   text-decoration: underline;
   text-decoration-color: var(--color-stone);
+  text-underline-offset: 0.15em;              /* Better underline positioning */
   transition: color 200ms ease, text-decoration-color 200ms ease;
 }
 
