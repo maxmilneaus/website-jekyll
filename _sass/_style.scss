@@ -100,6 +100,108 @@ h1 + p, h2 + p, h3 + p {
   margin-top: calc(var(--space-md) * 0.75);
 }
 
+/* Latest Section - Steph Ango inspired design */
+.latest-section {
+  margin: var(--space-xl) 0;
+}
+
+.latest-label {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-warm-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.latest-card {
+  display: block;
+  padding: var(--space-lg);
+  background: var(--color-charcoal);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-graphite);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--color-graphite);
+    border-color: var(--color-accent-subtle);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.latest-meta {
+  font-size: 0.875rem;
+  color: var(--color-warm-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.latest-separator {
+  margin: 0 var(--space-xs);
+}
+
+.latest-title {
+  font-size: 1.35rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-cream);
+  margin: 0 0 var(--space-sm) 0;
+  line-height: 1.3;
+}
+
+.latest-preview {
+  color: var(--color-warm-gray);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Topics Section */
+.topics-section {
+  margin: var(--space-xl) 0;
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.topic-item {
+  margin: 0;
+}
+
+.topic-link {
+  display: inline-block;
+  background: var(--color-charcoal);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--border-radius);
+  padding: var(--space-xs) var(--space-sm);
+  text-decoration: none;
+  color: var(--color-warm-gray);
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--color-graphite);
+    border-color: var(--color-accent-subtle);
+    color: var(--color-cream);
+    transform: translateY(-1px);
+  }
+}
+
+.topic-name {
+  font-weight: var(--font-weight-medium);
+}
+
+.topic-count {
+  color: var(--color-stone);
+  margin-left: var(--space-xs);
+}
+
 /* Long paragraphs get slightly more line height for easier reading */
 p {
   margin: var(--space-md) 0 var(--space-lg) 0;
@@ -121,7 +223,7 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 1(--space-md); /* Adjusted gap for tighter spacing */
+  gap: var(--space-md); /* Adjusted gap for tighter spacing */
 }
 
 .nav-links a {
