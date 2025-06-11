@@ -1,11 +1,8 @@
 ---
-title: "VOICE 2"
-year: 2024
-description: "Enhanced AI voice synthesis platform"
-status: "live"
+title: Max Milne Photography
+year: 2008 - 2024
+description: Advertising and Fine Art Photography
 order: 1
-tech_stack: ["Python", "PyTorch", "React", "FastAPI"]
-date_range: "2024"
 ---
 
 A complete ground-up rewrite of the VOICE platform with 50% better audio quality and 3x faster processing. VOICE 2 introduces real-time voice cloning and a modern web interface for non-technical users.
