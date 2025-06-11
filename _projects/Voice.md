@@ -1,11 +1,8 @@
 ---
-title: "VOICE"
+title: VOICE
 year: 2024
-description: "AI voice synthesis tool"
-status: "live"
+description: AI voice synthesis tool
 order: 2
-tech_stack: ["Python", "TensorFlow", "FastAPI"]
-date_range: "2024"
 ---
 
 VOICE transforms text into natural-sounding speech using advanced neural networks. The platform processes over 10,000 synthesis requests daily with sub-200ms latency.
