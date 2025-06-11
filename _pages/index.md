@@ -6,22 +6,13 @@ permalink: /
 ---
 {% assign latest_note = site.notes | sort: "last_modified_at_timestamp" | reverse | first %}
 {% if latest_note %}
-  {% assign content_clean = latest_note.content | strip_html | strip_newlines %}
-  {% assign sentences = content_clean | split: '. ' %}
-  {% assign first_sentence = sentences[0] | append: '.' %}
-  {% assign first_sentence_words = first_sentence | split: ' ' %}
-  {% if first_sentence_words.size > 35 %}
-    {% assign preview_words = first_sentence_words | slice: 0, 35 %}
-    {% assign content_text = preview_words | join: ' ' | append: '...' %}
-  {% else %}
-    {% assign content_text = first_sentence %}
-  {% endif %}
+  {% assign content_text = latest_note.content | strip_html | strip_newlines | truncate: 120 %}
   {% assign word_count = latest_note.content | strip_html | number_of_words %}
   {% assign reading_time = word_count | divided_by: 200 | plus: 1 %}
 
   <div class="latest-section">
-    <a href="{{ site.baseurl }}{{ latest_note.url }}" class="latest-label">Latest</a>
-    <a href="{{ site.baseurl }}{{ latest_note.url }}" class="latest-title-link">
+    <a href="{{ site.baseurl }}{{ latest_note.url }}" class="latest-label internal-link">Latest</a>
+    <a href="{{ site.baseurl }}{{ latest_note.url }}" class="latest-title-link internal-link">
       <h2 class="latest-title">{{ latest_note.title }}</h2>
     </a>
     <div class="latest-meta">
@@ -29,12 +20,12 @@ permalink: /
       <span class="latest-separator">·</span>
       <span class="latest-reading-time">{{ reading_time }} minute read</span>
     </div>
-    <p class="latest-preview">{{ content_text }} <a href="{{ site.baseurl }}{{ latest_note.url }}" class="read-more">Keep reading →</a></p>
+    <p class="latest-preview">{{ content_text }} <a href="{{ site.baseurl }}{{ latest_note.url }}" class="read-more internal-link">Keep reading →</a></p>
     <hr>
   </div>
 {% endif %}
+<h2 id="topics">Topics</h2>
 <div class="topics-section">
-  <div class="section-label">Topics</div>
   <ul class="topics-list">
     {% assign all_tags = site.tags | sort %}
     {% for tag in all_tags %}
@@ -51,8 +42,7 @@ permalink: /
   </ul>
 </div>
 
-<div class="writing-section">
-  <div class="section-label">Writing</div>
+<h2 id="writing">Writing</h2>
   <ul>
     {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
     {% for note in recent_notes limit: 10 %}
@@ -65,4 +55,4 @@ permalink: /
     </li>
     {% endfor %}
   </ul>
-</div>
+

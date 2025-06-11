@@ -3,206 +3,341 @@ title: Style Guide
 layout: note
 ---
 
-# Max Milne Website Style Guide
-*A cozy, contemplative aesthetic for thoughtful writing*
+# Max Milne Website Design System
+*A systematic approach to cozy, contemplative design*
 
 **Last updated:** June 11, 2025  
-**Current theme:** Viola/Rams Aesthetic
+**Design Philosophy:** Systems thinking with mathematical relationships  
+**Current theme:** Viola/Rams with Factor-Based Architecture
 
-1. Design Philosophy
-Core Principles
+---
 
-Mys (Swedish): That feeling of cozy contentment - candlelight warmth, intimate conversations, thoughtful reflection.
+## 1. Design Philosophy & Systems Thinking
 
-Lagom (Swedish): Just the right amount - not too much, not too little.
+### Core Principles
 
-Kaizen: Continuous subtle improvements that enhance without overwhelming.
+**Mys (Swedish):** That feeling of cozy contentment - candlelight warmth, intimate conversations, thoughtful reflection.
 
-Reading-first: Every design decision serves comfortable, focused reading.
+**Lagom (Swedish):** Just the right amount - not too much, not too little.
 
-Aesthetic: "Viola/Rams"
+**Kaizen:** Continuous subtle improvements that enhance without overwhelming.
 
-This style guide implements a synthesis of two core principles:
+**Systems Thinking:** Every design decision creates relationships. Changes should be universal, factor-based, and mathematically consistent.
 
-Viola (The Mood): The design feels atmospheric and contemplative, achieved through a warm, dark background and the use of a clean, light blue accent for clarity.
+### Aesthetic: "Viola/Rams + Systems"
 
-Rams (The Structure): The design is functional and honest. Every element is purposeful, with a preference for clear typographic hierarchy over unnecessary decoration. "Less, but better."
+**Viola (The Mood):** Atmospheric and contemplative, achieved through warm, dark backgrounds and clean blue accents.
 
-## Color Palette
-The palette is built on warm, soft-contrast tones, with a single light blue accent for all interactive states.
+**Rams (The Structure):** Functional and honest. Every element is purposeful, with clear typographic hierarchy over decoration.
 
-### Color Reference Key
+**Systems (The Method):** Factor-based spacing, universal color variables, and mathematical relationships that scale consistently.
 
-| Role | Variable | Hex | Primary Usage |
-|------|----------|-----|---------------|
-| **Background** | `--color-deep` | `#141210` | Main page background |
-| **Secondary BG** | `--color-charcoal` | `#201d1a` | Cards, code blocks, project backgrounds |
-| **Subtle Elements** | `--color-graphite` | `#2d2926` | Borders, card outlines |
-| **Dividers** | `--color-stone` | `#4a453f` | **Link underlines**, borders, blockquote borders |
-| **Primary Text** | `--color-cream` | `#e8ddd4` | Body text, headings, link text |
-| **Secondary Text** | `--color-warm-gray` | `#c7beb5` | Muted text, external link arrows |
-| **Interactive** | `--color-accent-hover` | `#93c5fd` | **All hover states**, article dates |
+---
 
-### SCSS Variables
+## 2. Systems Architecture
+
+### Factor-Based Spacing System
+
+Our spacing system uses **mathematical relationships** rather than arbitrary values:
 
 ```scss
-/* Primary Palette */
---color-deep: #141210;              // Background
---color-charcoal: #201d1a;          // Secondary backgrounds
---color-graphite: #2d2926;          // Borders, subtle elements
---color-stone: #4a453f;             // Dividers, stronger borders
---color-cream: #e8ddd4;             // Primary text
---color-warm-gray: #c7beb5;        // Secondary text, muted elements
-
-/* Unified Accent Color */
---color-accent-hover: #93c5fd;     /* Light blue for all hover/interactive states */
+/* Base Spacing Scale */
+--space-xs: 0.25rem;    /* Base unit */
+--space-sm: 0.5rem;     /* 2x base */
+--space-md: 1rem;       /* 4x base */
+--space-lg: 1.75rem;    /* 7x base */
+--space-xl: 3rem;       /* 12x base */
 ```
 
-3. Typography
-Typography is the primary tool for structure.
+**Mathematical relationships:**
+- All spacing derives from `0.25rem` base unit
+- Creates harmonic proportions: 1:2:4:7:12
+- Enables consistent scaling across all elements
 
-Font Stack
+### Universal Spacing Rules
 
-Primary: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif (--font-primary)
-
-Monospace: 'Roboto Mono', monospace (--font-mono)
-
-Hierarchy & Key Styles
-
-Headings (h1-h4): Use a clear size hierarchy to structure content.
-
-Body Text: 1rem base size with a 1.7 line height for optimal readability.
-
-Text Selection: A semi-transparent light blue background (rgba(147, 197, 253, 0.4)) provides clear feedback without obscuring text.
-
-4. Interactive & Content Elements
-Links
-
-**Unified Style:** All links, both internal and external, share the same classic underline style for consistency. The underline color uses **Stone** for subtle contrast against the cream text.
-
-**Hover State:** On hover, the link text and its underline both transition to **Interactive** blue.
-
-**External Link Indicator:** External links are distinguished by a discreet ↗ arrow appended to the text, signaling navigation away from the site. The arrow is styled as `inline-block` to prevent underline interference.
-
-**Recent Fix (June 2025):** Standardized all link underlines to use **Stone** color and fixed external link arrow underline issues.
-
-Interactive Blockquote
-
-Aesthetic: A space for quoted text, bordered with a neutral --color-stone.
-
-Functionality: On hover, a "Copy" button elegantly appears in the top-right corner, allowing the user to easily copy the quote's text. This provides utility without cluttering the default reading view.
-
-5. Components
-
-**Latest Section (.latest-section)**
-
-A featured section that automatically displays the most recent note, inspired by Steph Ango's design approach.
-
-**Structure:**
-- **"Latest" Label:** Clickable link that navigates to the most recent note
-- **Title:** Large, prominent heading linking to the full article
-- **Metadata:** Date and reading time estimate
-- **Preview:** Smart excerpt showing the first complete sentence (or first 35 words if the sentence is longer)
-- **Call-to-Action:** "Keep reading →" link
-
-**Typography:**
-- Label: 1rem, normal weight, meta color (`--color-meta`) with hover state
-- Title: 1.25rem, medium weight, cream color with blue hover
-- Meta: 0.875rem, meta color for both date and reading time
-- Preview: Meta color, 1.6 line height, matches body text weight
-
-**Content Logic:**
-- Automatically pulls the most recent note based on `last_modified_at_timestamp`
-- Smart truncation: Shows first complete sentence, or truncates at 35 words with ellipsis
-- Reading time calculated at 200 words per minute
-
-**Interactive Elements:**
-- "Latest" label links to the full article with subtle blue hover
-- Title has hover effect transitioning to accent color
-- "Keep reading →" maintains consistent underline styling
-
-**Recent Implementation (June 2025):** Complete Latest section with smart content truncation and consistent link styling throughout.
-
-Latest Articles List (.latest-posts)
-
-This component displays a list of recent articles with a refined, typographic structure.
-
-**Layout:** A 3-column grid: Date | Separator | Title.
-
-**Date Format:** YYYY MM (e.g., 2024 06).
-
-**Typography:** 
-- Date: Monospace font, light blue color (`--color-accent-hover`), 0.9em size
-- Separator: Stone color (`--color-stone`) dot character (·)
-- Title: Cream color with stone-colored underline
-
-**Text Decoration:** Only the article title has an underline. The date and separator explicitly have `text-decoration: none` to ensure clean presentation.
-
-**Hover Interaction:** On hover, only the article title changes color to light blue (`--color-accent-hover`) with matching underline color.
-
-**Spacing:** Vertical spacing between list items is tight (0.3rem) to create a dense, easily scannable directory.
-
-**Recent Update (June 2025):** Removed underlines from date and separator elements to match clean link styling patterns (inspired by stephango.com).
-
-Projects List (.projects-list)
-
-This component displays a list of projects in a clean, structured layout.
-
-**System:** Uses the `_projects` collection with Jekyll front matter for metadata.
-
-**Layout:** 2-column grid layout with year/date in the left column (100px) and content in the right column (1fr). Grid collapses to single column on mobile.
-
-**Structure:** Each project entry contains:
-- **Year column:** Project year or date range (e.g., "2024" or "2008 - 2024")
-- **Content column:** Project title (linked) and description
-
-**Typography:** 
-- Year: Small secondary text (`--color-text-secondary`, 0.85rem)
-- Title: Medium weight heading (1rem, 500 weight) with standard link styling
-- Description: Secondary text with reduced opacity (0.85)
-
-**Link Behavior:** Project titles use consistent site-wide link styling:
-- Default: Cream text with stone-colored underline
-- Hover: Light blue text and underline (`--color-accent-hover`)
-- Transition: 200ms ease for both color and text-decoration-color
-
-**Container Interaction:** Subtle background color change on hover (rgba(255,255,255,0.02)) with 200ms ease transition.
-
-**Spacing:** Generous vertical padding (1.25rem) with bottom borders between entries for clear separation.
-
-**Recent Update (June 2025):** Removed padding shifts on hover to prevent layout movement. Links now behave identically to all other site links.
-
-## Section Headers Pattern
-
-**Standardized approach for all content sections (Latest, Topics, Writing, etc.)**
-
-All section headers follow a consistent pattern inspired by Steph Ango's minimal design approach:
-
-**Typography:**
-- Font size: `1rem` (consistent across all sections)
-- Font weight: `var(--font-weight-normal)` (400)
-- Color: `var(--color-meta)` for subtle hierarchy
-- Letter spacing: `0.03em` for refined appearance
-
-**Spacing:**
-- Bottom margin: `var(--space-md)` (1rem) for proper separation from content
-- Creates breathing room between section label and content
-
-**Implementation Pattern:**
+**Content Container Spacing:**
 ```scss
-.section-label {
-  font-size: 1rem;
-  font-weight: var(--font-weight-normal);
-  color: var(--color-meta);
-  letter-spacing: 0.03em;
-  margin-bottom: var(--space-md);
-  display: block;
+main {
+  margin: calc(var(--space-xl) * 1.25) 0 var(--space-xl) 0;
+}
+/* Creates 3.75rem top margin universally across all page types */
+```
+
+**Horizontal Rules (HR) System:**
+```scss
+hr {
+  margin: calc(var(--space-xl) * 1) 0 calc(var(--space-xl) * 1.5) 0;
+  background: var(--color-divider);
+}
+/* Creates 3rem top, 4.5rem bottom in 2:3 ratio for visual harmony */
+```
+
+**Systems Benefits:**
+- ✅ **Universal consistency** - One rule affects all pages
+- ✅ **Mathematical harmony** - 2:3 proportional relationships
+- ✅ **Maintenance simplicity** - Change factors, not individual values
+- ✅ **Visual rhythm** - Predictable spacing relationships
+
+---
+
+## 3. Color Architecture
+
+### Primary Palette with Systematic Variables
+
+```scss
+/* Base Colors */
+--color-deep: #141210;              /* Background */
+--color-charcoal: #201d1a;          /* Secondary backgrounds */
+--color-graphite: #2d2926;          /* Borders, subtle elements */
+--color-stone: #4a453f;             /* Base divider color */
+--color-cream: #e8ddd4;             /* Primary text */
+--color-warm-gray: #c7beb5;         /* Secondary text */
+--color-meta: #9c958c;              /* Label text, metadata */
+
+/* Interactive */
+--color-accent-hover: #93c5fd;      /* All hover states */
+--color-accent-subtle: #3b82f6;     /* Accent elements */
+
+/* System Colors - Mathematical Relationships */
+--color-divider: rgba(74, 69, 63, 0.6); /* Stone + systematic 0.6 opacity */
+```
+
+### Universal Divider System
+
+**One variable controls ALL content dividers:**
+
+```scss
+/* Applied consistently to: */
+hr { background: var(--color-divider); }
+footer { border-top: 1px solid var(--color-divider); }
+.backlink-box { border-left: 2px solid var(--color-divider); }
+```
+
+**Systems Benefits:**
+- ✅ **Single source of truth** for divider appearance
+- ✅ **Consistent visual weight** across all dividers
+- ✅ **Easy theme changes** - modify one variable
+- ✅ **No scattered opacity values**
+
+---
+
+## 4. Typography System
+
+### Hierarchical Scale with Mathematical Relationships
+
+```scss
+/* Font Hierarchy */
+h1 { font-size: 2rem; }           /* 32px - Primary heading */
+h2 { font-size: 1.65rem; }        /* 26.4px - Section heading */
+h3 { font-size: 1.35rem; }        /* 21.6px - Subsection */
+body { font-size: 1rem; }         /* 16px base */
+
+/* Systematic Line Heights */
+--line-height: 1.7;               /* Body text optimized for reading */
+h1 { line-height: 1.15; }         /* Tighter for impact */
+h2-h6 { line-height: 1.25; }      /* Balanced for hierarchy */
+```
+
+### Spacing Relationships
+
+```scss
+/* Factor-based margins */
+h2 { margin-top: calc(var(--space-xl) * 1.25); }  /* 3.75rem section breaks */
+h3 { margin-top: var(--space-xl); }               /* 3rem subsection breaks */
+p { margin: var(--space-md) 0 var(--space-lg) 0; } /* 1rem - 1.75rem rhythm */
+```
+
+---
+
+## 5. Component Architecture
+
+### Latest Section - Factor-Based Design
+
+```scss
+.latest-section {
+  margin: 0 0 calc(var(--space-xl) * 1.5) 0;  /* 4.5rem bottom spacing */
 }
 ```
 
-**Usage:** Apply `.section-label` class to any section header element. For clickable labels (like Latest), additional hover states can be added while maintaining the core typography and spacing pattern.
+**Structure with systematic spacing:**
+- **Label:** `var(--space-md)` bottom margin (1rem)
+- **Title:** `var(--space-xs)` bottom margin (0.25rem) 
+- **Meta:** `var(--space-sm)` bottom margin (0.5rem)
+- **Preview:** `var(--space-md)` bottom margin (1rem)
 
-**Recent Standardization (June 2025):** Unified all section headers to use the same font size and spacing, ensuring consistent visual hierarchy across Latest, Topics, Writing, and future sections.
+### Section Headers - Universal Pattern
 
-This style guide documents the current "Viola/Rams" aesthetic - a cozy, contemplative design perfect for thoughtful writing and slow reading.
+```scss
+.section-label {
+  font-size: 1rem;                          /* Consistent across all sections */
+  font-weight: var(--font-weight-normal);   /* 400 weight */
+  color: var(--color-meta);                 /* Systematic hierarchy color */
+  letter-spacing: 0.03em;                   /* Refined spacing */
+  margin-bottom: var(--space-md);           /* 1rem breathing room */
+}
+```
 
+### Article Lists - Grid System
+
+```scss
+ul a {
+  display: grid;
+  grid-template-columns: auto auto 1fr;     /* Date | Separator | Title */
+  gap: 0.25rem;                             /* Quarter-unit spacing */
+  align-items: baseline;
+}
+```
+
+---
+
+## 6. Systems Guidelines for Future Development
+
+### Making Systematic Design Decisions
+
+**✅ DO: Use Factor-Based Thinking**
+```scss
+/* Good - uses mathematical relationship */
+margin: calc(var(--space-xl) * 1.5) 0;
+
+/* Good - derives from base spacing */
+padding: var(--space-md) var(--space-lg);
+```
+
+**❌ DON'T: Use Arbitrary Values**
+```scss
+/* Bad - magic number with no system relationship */
+margin: 47px 0;
+
+/* Bad - inline styles that can't be systematically updated */
+style="margin-top: 2.3rem;"
+```
+
+### Adding New Components
+
+**1. Spacing:** Use existing `--space-*` variables or create factors of them
+**2. Colors:** Use existing palette or add systematic variables to `:root`
+**3. Typography:** Follow established hierarchy relationships
+**4. Dividers:** Always use `var(--color-divider)` for consistency
+
+### Scaling the System
+
+**Factor Adjustments:**
+```scss
+/* To increase all HR spacing proportionally: */
+hr { margin: calc(var(--space-xl) * 1.2) 0 calc(var(--space-xl) * 1.8) 0; }
+/* Maintains 2:3 ratio while scaling up */
+```
+
+**Color System Extensions:**
+```scss
+/* Add new systematic colors following the pattern: */
+--color-success: rgba(34, 197, 94, 0.8);   /* Green with systematic opacity */
+--color-warning: rgba(251, 191, 36, 0.8);  /* Yellow with systematic opacity */
+```
+
+---
+
+## 7. Link System
+
+### Universal Link Behavior
+
+**All links share consistent styling:**
+
+```scss
+a {
+  color: var(--color-stone);                     /* Subtle default color */
+  text-decoration: underline;
+  text-decoration-color: var(--color-stone);     /* Matching underline */
+  text-underline-offset: 0.2em;                 /* Systematic offset */
+  transition: color 200ms ease, text-decoration-color 200ms ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);              /* Blue hover */
+  text-decoration-color: var(--color-accent-hover); /* Matching underline */
+}
+```
+
+**External Link Differentiation:**
+- ↗ arrow indicator with `--color-warm-gray`
+- Italic styling to distinguish from internal links
+- No underline on arrow icon
+
+---
+
+## 8. Implementation Patterns
+
+### Universal Rules Over Specific Overrides
+
+**✅ Systematic Approach:**
+```scss
+/* One rule affects all content containers */
+main { margin: calc(var(--space-xl) * 1.25) 0 var(--space-xl) 0; }
+```
+
+**❌ Individual Overrides:**
+```html
+<!-- Avoid scattered inline styles -->
+<article style="margin-top: 3.75rem;">
+<div style="margin-top: 60px;">
+```
+
+### CSS Custom Properties for Systematic Control
+
+**✅ Variables for Mathematical Relationships:**
+```scss
+:root {
+  --section-spacing-factor: 1.25;           /* Factor for section spacing */
+  --divider-opacity: 0.6;                   /* Systematic divider opacity */
+}
+
+.latest-section {
+  margin-top: calc(var(--space-xl) * var(--section-spacing-factor));
+}
+```
+
+---
+
+## 9. Responsive Behavior
+
+### Systematic Breakpoints
+
+```scss
+/* Mobile-first with systematic scaling */
+@media (max-width: 600px) {
+  body { padding: var(--space-lg) 4vw; }     /* Scales down systematically */
+}
+
+@media (min-width: 820px) {
+  body { 
+    font-size: 1.05rem;                     /* 5% increase */
+    line-height: 1.75;                      /* Proportional line-height */
+  }
+}
+```
+
+---
+
+## 10. Quality Assurance Checklist
+
+### Before Making Changes
+
+- [ ] Does this use existing spacing variables or create systematic factors?
+- [ ] Are colors drawn from the established palette?
+- [ ] Do spacing relationships maintain mathematical harmony?
+- [ ] Can this change be made universally rather than specifically?
+- [ ] Does this improve the system or just solve an isolated problem?
+
+### After Implementation
+
+- [ ] Do all similar elements now behave consistently?
+- [ ] Are there new arbitrary values that should be systematized?
+- [ ] Can this pattern be documented for future reuse?
+- [ ] Does the change scale properly across breakpoints?
+
+---
+
+This design system creates **mathematical harmony** through factor-based relationships while maintaining the cozy, contemplative aesthetic. Every spacing decision derives from systematic thinking rather than visual approximation.
+
+**Key Philosophy:** *Changes should improve the entire system, not just individual components.*

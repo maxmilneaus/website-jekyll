@@ -270,7 +270,7 @@ nav {
   padding: 0;                              /* Remove padding for cleaner look */
   
   &:hover {
-    color: var(--color-cream);               /* Lighten on hover */
+    color: var(--color-accent-hover) !important; /* Force consistent hover color */
   }
 }
 
@@ -304,7 +304,7 @@ a {
 /* External link styling */
 a {
   /* Only external links (not internal-link class, not same-site relative URLs) get arrow and italic styling */
-  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]):after {
+  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]):not(.nav-links a):after {
     content: "↗";
     position: relative;
     top: -0.3em;
@@ -315,7 +315,7 @@ a {
   }
 
   /* Only external links are italic */
-  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]) {
+  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]):not(.nav-links a) {
     font-style: italic;
   }
 
