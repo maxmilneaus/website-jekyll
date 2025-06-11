@@ -29,7 +29,7 @@
   
   /* Reading-optimized layout */
   --border-radius: 3px;
-  --max-width: 45rem;           /* Narrower for intimate reading */
+  --max-width: 38rem;           /* Even narrower like Steph's - more focused reading */
   --line-height: 1.7;          /* Slightly more generous */
 }
 
@@ -42,7 +42,7 @@ body {
   line-height: var(--line-height);
   margin: 0 auto;
   max-width: var(--max-width);
-  padding: var(--space-xl) 6vw;
+  padding: var(--space-xl) 2rem;
   /* Subtle reading flow improvements */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -107,12 +107,18 @@ h1 + p, h2 + p, h3 + p {
 }
 
 .latest-label {
-  font-size: 0.875rem;
-  font-weight: var(--font-primary);
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
   color: var(--color-meta);
   font-variant: normal;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-sm); // Adjusted spacing
+  text-decoration: none;
+  display: block;
+  
+  &:hover {
+    color: var(--color-accent-hover);
+  }
 }
 
 .latest-title-link {
@@ -159,8 +165,25 @@ h1 + p, h2 + p, h3 + p {
   }
 }
 
+/* Section Labels - consistent styling across Latest, Topics, Writing */
+.section-label {
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-meta);
+  font-variant: normal;
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
+  text-decoration: none;
+  display: block;
+}
+
 /* Topics Section */
 .topics-section {
+  margin: var(--space-xl) 0;
+}
+
+/* Writing Section */
+.writing-section {
   margin: var(--space-xl) 0;
 }
 
@@ -211,46 +234,38 @@ p {
   color: var(--color-cream);
 }
 
-/* Navigation - minimal, cozy */
+/* Navigation - minimal, Steph-inspired */
 nav {
-  margin: var(--space-md) 0 var(--space-lg) 0;
-  padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-stone);
+  margin: 0 0 var(--space-xl) 0;    /* Remove top margin, increase bottom */
+  padding: 0;                       /* Remove padding for cleaner alignment */
 
   > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
+  /* Remove underlines from ALL navigation links */
+  a {
+    text-decoration: none !important;
+  }
 }
 
 .nav-links {
   display: flex;
-  gap: var(--space-md); /* Adjusted gap for tighter spacing */
+  gap: var(--space-lg);                   /* Slightly wider gap for elegance */
 }
 
 .nav-links a {
-  color: var(--color-cream);
-  text-decoration: underline;
-  text-decoration-color: var(--color-cream);
-  text-underline-offset: 0.2em;
-  font-weight: var(--font-weight-medium);
+  color: var(--color-warm-gray);           /* Darker shade like Steph's About/Now */
+  text-decoration: none;
+  font-weight: var(--font-weight-normal);  /* Thinner, more elegant */
   letter-spacing: 0.01em;
-  transition: color 200ms ease, text-decoration-color 200ms ease, transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--border-radius);
-  position: relative;
-  transform: translateZ(0);
-
+  transition: color 200ms ease;
+  padding: 0;                              /* Remove padding for cleaner look */
+  
   &:hover {
-    color: var(--color-accent-hover);
-    text-decoration-color: var(--color-accent-hover);
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: translateY(0px);
-    transition: transform 100ms ease;
+    color: var(--color-cream);               /* Lighten on hover */
   }
 }
 
@@ -308,18 +323,14 @@ a {
 /* Site title - consistent highlighting */
 .site-title a {
   color: var(--color-cream);
-  font-weight: var(--font-weight-bold);
-  text-decoration: underline;
-  text-decoration-color: var(--color-cream);
-  text-underline-offset: 0.2em;
-  transition: color 200ms ease, text-decoration-color 200ms ease;
-  padding: var(--space-sm) var(--space-md);
+  font-weight: var(--font-weight-normal);  /* Thinner, more elegant like Steph */
+  text-decoration: none;
+  transition: color 200ms ease;
+  padding: 0;                              /* Remove padding for cleaner look */
   margin: 0;
-  border-radius: var(--border-radius);
 
   &:hover {
-    color: var(--color-highlight);
-    text-decoration-color: var(--color-highlight);
+    color: var(--color-accent-hover);
   }
 }
 
@@ -470,7 +481,7 @@ ul a {
   grid-template-columns: auto auto 1fr; /* 3 columns: Date | Separator | Title */
   gap: 0.25rem;
   align-items: baseline;
-  text-decoration: none;
+  text-decoration: none !important;
   padding: 0.0rem 0;
 }
 /* This rule now ONLY targets the title for hover */
@@ -480,15 +491,15 @@ ul a:hover .article-title {
 }
 .article-date {
   font-family: var(--font-mono);
-  color: var(--color-accent-hover); /* Date is light blue by default */
+  color: var(--color-meta); /* Match section header color */
   font-size: 0.9em;
   margin-right: .5rem;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .article-separator {
   color: var(--color-stone);
   margin-right: .5rem;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .article-title {
   color: var(--color-cream);

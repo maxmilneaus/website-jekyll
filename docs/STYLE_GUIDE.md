@@ -93,6 +93,36 @@ Aesthetic: A space for quoted text, bordered with a neutral --color-stone.
 Functionality: On hover, a "Copy" button elegantly appears in the top-right corner, allowing the user to easily copy the quote's text. This provides utility without cluttering the default reading view.
 
 5. Components
+
+**Latest Section (.latest-section)**
+
+A featured section that automatically displays the most recent note, inspired by Steph Ango's design approach.
+
+**Structure:**
+- **"Latest" Label:** Clickable link that navigates to the most recent note
+- **Title:** Large, prominent heading linking to the full article
+- **Metadata:** Date and reading time estimate
+- **Preview:** Smart excerpt showing the first complete sentence (or first 35 words if the sentence is longer)
+- **Call-to-Action:** "Keep reading →" link
+
+**Typography:**
+- Label: 1rem, normal weight, meta color (`--color-meta`) with hover state
+- Title: 1.25rem, medium weight, cream color with blue hover
+- Meta: 0.875rem, meta color for both date and reading time
+- Preview: Meta color, 1.6 line height, matches body text weight
+
+**Content Logic:**
+- Automatically pulls the most recent note based on `last_modified_at_timestamp`
+- Smart truncation: Shows first complete sentence, or truncates at 35 words with ellipsis
+- Reading time calculated at 200 words per minute
+
+**Interactive Elements:**
+- "Latest" label links to the full article with subtle blue hover
+- Title has hover effect transitioning to accent color
+- "Keep reading →" maintains consistent underline styling
+
+**Recent Implementation (June 2025):** Complete Latest section with smart content truncation and consistent link styling throughout.
+
 Latest Articles List (.latest-posts)
 
 This component displays a list of recent articles with a refined, typographic structure.
