@@ -172,5 +172,37 @@ This component displays a list of projects in a clean, structured layout.
 
 **Recent Update (June 2025):** Removed padding shifts on hover to prevent layout movement. Links now behave identically to all other site links.
 
+## Section Headers Pattern
+
+**Standardized approach for all content sections (Latest, Topics, Writing, etc.)**
+
+All section headers follow a consistent pattern inspired by Steph Ango's minimal design approach:
+
+**Typography:**
+- Font size: `1rem` (consistent across all sections)
+- Font weight: `var(--font-weight-normal)` (400)
+- Color: `var(--color-meta)` for subtle hierarchy
+- Letter spacing: `0.03em` for refined appearance
+
+**Spacing:**
+- Bottom margin: `var(--space-md)` (1rem) for proper separation from content
+- Creates breathing room between section label and content
+
+**Implementation Pattern:**
+```scss
+.section-label {
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-meta);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+```
+
+**Usage:** Apply `.section-label` class to any section header element. For clickable labels (like Latest), additional hover states can be added while maintaining the core typography and spacing pattern.
+
+**Recent Standardization (June 2025):** Unified all section headers to use the same font size and spacing, ensuring consistent visual hierarchy across Latest, Topics, Writing, and future sections.
+
 This style guide documents the current "Viola/Rams" aesthetic - a cozy, contemplative design perfect for thoughtful writing and slow reading.
 

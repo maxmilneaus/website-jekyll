@@ -13,6 +13,9 @@
   --color-accent-hover: #93c5fd;
   --color-accent-subtle: #3b82f6;     /* Subtle blue accent */
   
+  /* System colors for consistent dividers */
+  --color-divider: var(--color-stone); /* var(--color-stone) with systematic opacity */
+  
   /* Typography - cozy yet precise */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-mono: 'Roboto Mono', monospace;
@@ -29,7 +32,7 @@
   
   /* Reading-optimized layout */
   --border-radius: 3px;
-  --max-width: 38rem;           /* Even narrower like Steph's - more focused reading */
+  --max-width: 42rem;           /* Match Steph's generous proportions */
   --line-height: 1.7;          /* Slightly more generous */
 }
 
@@ -104,7 +107,7 @@ h1 + p, h2 + p, h3 + p {
 
 /* Latest Section - Steph Ango inspired design */
 .latest-section {
-  margin: calc(var(--space-xl) * 1.25) 0 calc(var(--space-xl) * 1.5) 0;  /* More separation from nav */
+  margin: 0 0 calc(var(--space-xl) * 1.5) 0;
 }
 
 .latest-label {
@@ -113,7 +116,7 @@ h1 + p, h2 + p, h3 + p {
   color: var(--color-meta);               /* Same color as meta/preview */
   font-variant: normal;
   letter-spacing: 0.03em;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);         /* Increased spacing to title */
   text-decoration: none;
   display: block;
   
@@ -169,12 +172,12 @@ h1 + p, h2 + p, h3 + p {
 
 /* Section Labels - consistent styling across Latest, Topics, Writing */
 .section-label {
-  font-size: 0.9rem;                      /* Match latest-label size */
+  font-size: 1rem;                        /* Match latest-label size */
   font-weight: var(--font-weight-normal);
   color: var(--color-meta);
   font-variant: normal;
   letter-spacing: 0.03em;                 /* Consistent letter spacing */
-  margin-bottom: 0;
+  margin-bottom: var(--space-md);         /* Match latest-label spacing */
   text-decoration: none;
   display: block;
 }
@@ -325,7 +328,7 @@ a {
 /* Site title - consistent highlighting */
 .site-title a {
   color: var(--color-cream);
-  font-weight: var(--font-weight-normal);  /* Thinner, more elegant like Steph */
+  font-weight: 300;                        /* Lighter than nav links (400) for distinction */
   text-decoration: none;
   transition: color 200ms ease;
   padding: 0;                              /* Remove padding for cleaner look */
@@ -346,14 +349,13 @@ a {
 
 /* Content containers */
 main {
-  margin: var(--space-lg) 0 var(--space-xl) 0;
+  margin: calc(var(--space-xl) * 1.25) 0 var(--space-xl) 0;
 }
 
 footer {
   margin: var(--space-xl) 0 var(--space-lg) 0;
   padding: var(--space-lg) 0;
-  border-top: 1px solid var(--color-stone);
-  opacity: 0.6;                              /* Match HR opacity */
+  border-top: 1px solid var(--color-divider);
   color: var(--color-warm-gray);
   font-size: 0.9rem;
 }
@@ -408,7 +410,7 @@ img {
 
 /* Blockquotes - subtle, spacious */
 blockquote {
-  border-left: 2px solid var(--color-stone);
+  border-left: 2px solid var(--color-divider);
   margin: var(--space-xl) 0;
   padding-left: var(--space-lg);
   font-style: italic;
@@ -416,14 +418,13 @@ blockquote {
   p { margin: 0; }
 }
 
-/* Horizontal rules - subtle warm dividers */
+/* Horizontal rules - systematic breathing room with factor-based spacing */
 hr {
   width: 100%;
   border: 0;
   height: 1px;
-  margin: var(--space-lg) 0 var(--space-xl) 0;
-  background: var(--color-stone);             /* Same color as latest section HR */
-  opacity: 0.6;                              /* Consistent opacity throughout */
+  margin: calc(var(--space-xl) * 1) 0 calc(var(--space-xl) * 1.5) 0;
+  background: var(--color-divider);
 }
 
 /* Code - warm, functional */
@@ -451,7 +452,7 @@ pre {
   background: transparent;
   padding: var(--space-sm);
   border-radius: var(--border-radius);
-  border-left: 2px solid var(--color-stone);
+  border-left: 2px solid var(--color-divider);
   border-top: none;
   border-right: none;
   border-bottom: none;

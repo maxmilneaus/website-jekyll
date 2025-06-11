@@ -66,4 +66,3 @@ permalink: /
     {% endfor %}
   </ul>
 </div>
-
