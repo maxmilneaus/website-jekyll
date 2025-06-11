@@ -22,8 +22,6 @@
   
   &:hover {
     background-color: rgba(255, 255, 255, 0.02);
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
   }
 }
 
@@ -45,11 +43,15 @@
   line-height: 1.3;
   
   a {
-    text-decoration: none;
-    color: var(--color-text);
+    color: var(--color-cream);
+    text-decoration: underline;
+    text-decoration-color: var(--color-stone);
+    text-underline-offset: 0.2em;
+    transition: color 200ms ease, text-decoration-color 200ms ease;
     
     &:hover {
-      text-decoration: underline;
+      color: var(--color-accent-hover);
+      text-decoration-color: var(--color-accent-hover);
     }
   }
 }

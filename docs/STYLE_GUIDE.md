@@ -97,29 +97,50 @@ Latest Articles List (.latest-posts)
 
 This component displays a list of recent articles with a refined, typographic structure.
 
-Layout: A 3-column grid: Date | Separator | Title.
+**Layout:** A 3-column grid: Date | Separator | Title.
 
-Date Format: YYYY MM (e.g., 2024 06).
+**Date Format:** YYYY MM (e.g., 2024 06).
 
-Date Styling: The date is colored with the light blue --color-accent-hover by default, giving it visual importance as a key piece of metadata.
+**Typography:** 
+- Date: Monospace font, light blue color (`--color-accent-hover`), 0.9em size
+- Separator: Stone color (`--color-stone`) dot character (·)
+- Title: Cream color with stone-colored underline
 
-Hover Interaction: On hover, the article title only changes color to match the date's light blue, creating a focused interaction.
+**Text Decoration:** Only the article title has an underline. The date and separator explicitly have `text-decoration: none` to ensure clean presentation.
 
-Spacing: Vertical spacing between list items is tight (0.3rem) to create a dense, easily scannable directory.
+**Hover Interaction:** On hover, only the article title changes color to light blue (`--color-accent-hover`) with matching underline color.
 
-Projects Page (.projects-list)
+**Spacing:** Vertical spacing between list items is tight (0.3rem) to create a dense, easily scannable directory.
 
-This component displays a list of projects, with each project being a standard internal note.
+**Recent Update (June 2025):** Removed underlines from date and separator elements to match clean link styling patterns (inspired by stephango.com).
 
-System: Uses the _notes directory and filters for notes with type: project in their front matter.
+Projects List (.projects-list)
 
-Layout: A clean, vertical list where each item is a clickable block, separated by top and bottom borders.
+This component displays a list of projects in a clean, structured layout.
 
-Content: Each list item displays the project's title and the first paragraph of its content as a short description.
+**System:** Uses the `_projects` collection with Jekyll front matter for metadata.
 
-Interaction: Hovering over a project block changes its background color to --color-charcoal and the project title's color to --color-accent-hover.
+**Layout:** 2-column grid layout with year/date in the left column (100px) and content in the right column (1fr). Grid collapses to single column on mobile.
 
-Linking: Clicking a project block navigates the user to the full project note within the site.
+**Structure:** Each project entry contains:
+- **Year column:** Project year or date range (e.g., "2024" or "2008 - 2024")
+- **Content column:** Project title (linked) and description
+
+**Typography:** 
+- Year: Small secondary text (`--color-text-secondary`, 0.85rem)
+- Title: Medium weight heading (1rem, 500 weight) with standard link styling
+- Description: Secondary text with reduced opacity (0.85)
+
+**Link Behavior:** Project titles use consistent site-wide link styling:
+- Default: Cream text with stone-colored underline
+- Hover: Light blue text and underline (`--color-accent-hover`)
+- Transition: 200ms ease for both color and text-decoration-color
+
+**Container Interaction:** Subtle background color change on hover (rgba(255,255,255,0.02)) with 200ms ease transition.
+
+**Spacing:** Generous vertical padding (1.25rem) with bottom borders between entries for clear separation.
+
+**Recent Update (June 2025):** Removed padding shifts on hover to prevent layout movement. Links now behave identically to all other site links.
 
 This style guide documents the current "Viola/Rams" aesthetic - a cozy, contemplative design perfect for thoughtful writing and slow reading.
 

@@ -1,0 +1,231 @@
+// Animations for Goldsworthy Fragments
+// Therapeutic, contemplative animations inspired by VOICE project
+
+/* Goldsworthy Fragments - Broken and Beautifully Rearranged */
+.goldsworthy-fragments {
+  position: relative;
+  width: 80px;
+  height: 60px;
+  margin: 0 auto;
+  animation: natural-breath 8s ease-in-out infinite;
+}
+
+/* VOICE Fragments - Therapeutic Collaboration Energy */
+
+/* Fragment 1 - Vulnerable confession (broken circle, opening up) */
+.fragment-1 {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(199, 190, 181, 0.7);
+  border-top: none;
+  border-left: none;
+  border-radius: 50%;
+  animation: vulnerable-opening 7s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(199, 190, 181, 0.3));
+}
+
+/* Fragment 2 - Collaborative voices (overlapping circles) */
+.fragment-2 {
+  position: absolute;
+  top: 18px;
+  right: 6px;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle,
+    rgba(199, 190, 181, 0.6) 0%,
+    rgba(199, 190, 181, 0.4) 30%,
+    transparent 60%
+  );
+  border-radius: 50%;
+  animation: collective-harmony 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px rgba(199, 190, 181, 0.25));
+}
+
+/* Fragment 3 - Therapeutic process flow */
+.fragment-3 {
+  position: absolute;
+  top: 38px;
+  left: 15px;
+  width: 28px;
+  height: 3px;
+  background: linear-gradient(90deg,
+    rgba(199, 190, 181, 0.8) 0%,
+    rgba(199, 190, 181, 0.6) 40%,
+    rgba(199, 190, 181, 0.3) 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  animation: healing-flow 9s ease-in-out infinite;
+  filter: drop-shadow(0 0 3px rgba(199, 190, 181, 0.4));
+}
+
+/* Fragment 4 - Personal breakthrough (irregular, breaking apart) */
+.fragment-4 {
+  position: absolute;
+  top: 10px;
+  left: 38px;
+  width: 10px;
+  height: 15px;
+  background: rgba(199, 190, 181, 0.5);
+  border-radius: 70% 30% 40% 60% / 50% 60% 40% 50%;
+  animation: breakthrough-tremor 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px rgba(199, 190, 181, 0.3));
+}
+
+/* Fragment 5 - Core therapeutic essence (warm, pulsing heart) */
+.fragment-5 {
+  position: absolute;
+  top: 28px;
+  left: 30px;
+  width: 5px;
+  height: 5px;
+  background: rgba(199, 190, 181, 0.9);
+  border-radius: 50%;
+  animation: therapeutic-heart 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(199, 190, 181, 0.5));
+}
+
+/* Ambient field around fragments */
+.goldsworthy-fragments::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 90px;
+  background: radial-gradient(ellipse,
+    rgba(199, 190, 181, 0.08) 0%,
+    rgba(199, 190, 181, 0.04) 50%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  animation: field-memory 12s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* VOICE-specific therapeutic animations */
+
+@keyframes natural-breath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes vulnerable-opening {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1) rotate(0deg);
+  }
+  30% {
+    opacity: 0.9;
+    transform: scale(1.08) rotate(2deg);
+  }
+  70% {
+    opacity: 0.8;
+    transform: scale(1.03) rotate(-1deg);
+  }
+}
+
+@keyframes collective-harmony {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(1px, -2px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-1px, 0px);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translate(2px, 1px);
+    opacity: 0.7;
+  }
+}
+
+@keyframes healing-flow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scaleX(1) scaleY(1);
+  }
+  40% {
+    opacity: 1;
+    transform: scaleX(1.15) scaleY(1.2);
+  }
+  80% {
+    opacity: 0.9;
+    transform: scaleX(1.05) scaleY(0.8);
+  }
+}
+
+@keyframes breakthrough-tremor {
+  0%, 100% {
+    border-radius: 70% 30% 40% 60% / 50% 60% 40% 50%;
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  20% {
+    border-radius: 60% 40% 50% 50% / 60% 40% 50% 60%;
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  60% {
+    border-radius: 80% 20% 30% 70% / 40% 70% 60% 40%;
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+  85% {
+    border-radius: 50% 50% 60% 40% / 70% 30% 50% 50%;
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes therapeutic-heart {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  25% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.95;
+  }
+  75% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes field-memory {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.stove-caption {
+  font-size: 0.8rem;
+  color: var(--color-warm-gray);
+  margin: 0;
+  opacity: 0.7;
+  font-style: italic;
+}
