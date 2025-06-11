@@ -15,7 +15,7 @@ Like Andy Goldsworthy walking through a landscape, feeling the materials, and fo
 **Process:**
 - Read the piece slowly, without agenda
 - Notice where your attention catches
-- Feel the emotional undertones  
+- Feel the emotional undertones  s
 - Sense the physical rhythm of the words
 - Let impressions accumulate without judgment
 
