@@ -12,15 +12,16 @@ permalink: /
 
   <div class="latest-section">
     <div class="latest-label">Latest</div>
-    <a href="{{ site.baseurl }}{{ latest_note.url }}" class="latest-card">
-      <div class="latest-meta">
-        <span class="latest-date">{{ latest_note.last_modified_at | date: "%B %d, %Y" }}</span>
-        <span class="latest-separator">·</span>
-        <span class="latest-reading-time">{{ reading_time }} minute read</span>
-      </div>
+    <a href="{{ site.baseurl }}{{ latest_note.url }}" class="latest-title-link">
       <h2 class="latest-title">{{ latest_note.title }}</h2>
-      <p class="latest-preview">{{ content_text }}</p>
     </a>
+    <div class="latest-meta">
+      <span class="latest-date">{{ latest_note.last_modified_at | date: "%B %d, %Y" }}</span>
+      <span class="latest-separator">·</span>
+      <span class="latest-reading-time">{{ reading_time }} minute read</span>
+    </div>
+    <p class="latest-preview">{{ content_text }} <a href="{{ site.baseurl }}{{ latest_note.url }}" class="read-more">Keep reading →</a></p>
+    <hr>
   </div>
 {% endif %}
 <h2 id="topics">Topics</h2>
