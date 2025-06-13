@@ -14,6 +14,22 @@ layout: default
   {{ content }}
 </content>
 
+{% if page.has_recommendations and page.similar_notes.size > 0 %}
+<div class="you-might-enjoy">
+  <h3>You might also enjoy</h3>
+  <ul class="recommendations-list">
+    {% for recommendation in page.similar_notes %}
+      <li>
+        <a class="internal-link" href="{{ site.baseurl }}{{ recommendation.url }}">{{ recommendation.title }}</a>
+        {% if site.embeddings_recommendations.show_similarity_scores %}
+          <span class="similarity-score">({{ recommendation.similarity_score }})</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
 <hr>
 
 <h3>Linked mentions</h3>

@@ -146,7 +146,7 @@ h1 + p, h2 + p, h3 + p {
   text-decoration: none !important;
   color: var(--color-accent-subtle);
 
-  &:hover .title {
+  &:hover .latest-title { /* Changed .title to .latest-title */
     color: var(--color-accent-hover);
   }
 }
@@ -560,6 +560,55 @@ pre {
 /* Apply article list class to writing section ul */
 ul {
   @extend .article-list;
+}
+
+/* =============================================================================
+   EMBEDDINGS RECOMMENDATIONS - "You might also enjoy" component
+   ============================================================================= */
+
+.you-might-enjoy {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-divider);
+  
+  h3 {
+    font-size: 1.35rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-warm-gray);
+    margin: 0 0 var(--space-md) 0;
+    line-height: 1.25;
+  }
+  
+  .recommendations-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin: var(--space-sm) 0;
+      
+      a {
+        color: var(--color-stone);
+        text-decoration: underline;
+        text-decoration-color: var(--color-stone);
+        text-underline-offset: 0.2em;
+        transition: color 200ms ease, text-decoration-color 200ms ease;
+        
+        &:hover {
+          color: var(--color-accent-hover);
+          text-decoration-color: var(--color-accent-hover);
+        }
+      }
+    }
+  }
+  
+  .similarity-score {
+    color: var(--color-meta);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-normal);
+    margin-left: var(--space-xs);
+    opacity: 0.7;
+  }
 }
 
 /* --- PROJECTS PAGE GRID --- */

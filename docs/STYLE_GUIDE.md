@@ -72,10 +72,10 @@ main {
 **Horizontal Rules (HR) System:**
 ```scss
 hr {
-  margin: calc(var(--space-xl) * 1) 0 calc(var(--space-xl) * 1.5) 0;
+  margin: var(--section-spacing) 0;
   background: var(--color-divider);
 }
-/* Creates 3rem top, 4.5rem bottom in 2:3 ratio for visual harmony */
+/* Creates 3rem top and bottom for consistent visual rhythm */
 ```
 
 **Systems Benefits:**

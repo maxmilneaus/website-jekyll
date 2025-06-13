@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Preview: Typography Fix</title>
+    <style>
+        :root {
+            --color-deep: #141210;
+            --color-charcoal: #201d1a;
+            --color-graphite: #2d2926;
+            --color-stone: #4a453f;
+            --color-cream: #e8ddd4;
+            --color-warm-gray: #c7beb5;
+            --color-meta: #9c958c;
+            --color-accent-hover: #93c5fd;
+            --color-accent-subtle: #3b82f6;
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.75rem;
+            --space-xl: 3rem;
+            --font-weight-normal: 400;
+            --line-height: 1.7;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: var(--color-deep);
+            color: var(--color-cream);
+            margin: 2rem;
+            line-height: var(--line-height);
+        }
+
+        .container {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .column {
+            flex: 1;
+            background-color: var(--color-charcoal);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-graphite);
+        }
+
+        h1 {
+            color: var(--color-cream);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-graphite);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-label {
+            font-weight: var(--font-weight-normal);
+            color: var(--color-meta);
+            letter-spacing: 0.03em;
+            margin-bottom: var(--space-md);
+            display: block;
+            padding-top: var(--space-md);
+        }
+
+        .section-label.current {
+            font-size: 1rem; /* Current implementation */
+        }
+
+        .section-label.proposed {
+            font-size: 1.35rem; /* Proposed fix */
+            color: var(--color-accent-subtle); /* Highlight for visibility */
+        }
+
+        .content-block {
+            background-color: var(--color-deep);
+            padding: var(--space-md);
+            border-radius: 4px;
+            border: 1px solid var(--color-graphite);
+            margin-bottom: var(--space-md);
+        }
+
+        p {
+            margin-bottom: var(--space-md);
+        }
+
+        a {
+            color: var(--color-stone);
+            text-decoration: underline;
+            text-decoration-color: var(--color-stone);
+            text-underline-offset: 0.2em;
+            transition: color 200ms ease, text-decoration-color 200ms ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-hover);
+            text-decoration-color: var(--color-accent-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column">
+            <h1>Current Implementation (1rem)</h1>
+            <div class="section-label current" id="topics-current">Topics</div>
+            <div class="content-block">
+                <p>This is a sample content block under the "Topics" section. The font size of the "Topics" label above is currently 1rem, as per the existing CSS.</p>
+                <p>This section demonstrates the current visual hierarchy and spacing before any changes are applied.</p>
+                <a href="#">Sample Link</a>
+            </div>
+
+            <div class="section-label current" id="writing-current">Writing</div>
+            <div class="content-block">
+                <p>Another content block for the "Writing" section. Notice how the label's size affects the overall visual flow and hierarchy on the page.</p>
+                <p>The goal is to align this label's size with the intended typographic scale from the style guide.</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <h1>Proposed Fix (1.35rem)</h1>
+            <div class="section-label proposed" id="topics-proposed">Topics</div>
+            <div class="content-block">
+                <p>This is a sample content block under the "Topics" section. The font size of the "Topics" label above is now 1.35rem, reflecting the proposed change.</p>
+                <p>Observe the improved visual hierarchy and how it better aligns with the style guide's typography system for section headings.</p>
+                <a href="#">Sample Link</a>
+            </div>
+
+            <div class="section-label proposed" id="writing-proposed">Writing</div>
+            <div class="content-block">
+                <p>Another content block for the "Writing" section. The increased font size for the label creates a clearer distinction and stronger visual presence.</p>
+                <p>This change aims to enhance readability and consistency across all section headers on the homepage.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -21,8 +21,8 @@ permalink: /
       <span class="latest-reading-time">{{ reading_time }} minute read</span>
     </div>
     <p class="latest-preview">{{ content_text }} <a href="{{ site.baseurl }}{{ latest_note.url }}" class="read-more internal-link">Keep reading →</a></p>
-    <hr>
   </div>
+  <hr>
 {% endif %}
 <div class="section-label" id="topics">Topics</div>
 <div class="topics-section">
