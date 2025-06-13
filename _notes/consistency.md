@@ -1,5 +1,9 @@
 ---
 title: Consistency is key
+tags:
+  - Self-improvement
+  - test
+  - chickenpoo
 ---
 
 Show up. Do the work. Be consistent.

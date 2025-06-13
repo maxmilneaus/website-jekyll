@@ -24,25 +24,41 @@ permalink: /
     <hr>
   </div>
 {% endif %}
-<h2 id="topics">Topics</h2>
+<div class="section-label" id="topics">Topics</div>
 <div class="topics-section">
+  {% comment %}
+  Build tags collection manually from notes collection
+  {% endcomment %}
+  {% assign all_tags_array = "" | split: "" %}
+  {% for note in site.notes %}
+    {% if note.tags %}
+      {% for tag in note.tags %}
+        {% assign all_tags_array = all_tags_array | push: tag %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  
+  {% assign unique_tags = all_tags_array | sort | uniq %}
+  
   <ul class="topics-list">
-    {% assign all_tags = site.tags | sort %}
-    {% for tag in all_tags %}
-      {% assign tag_slug = tag | first | slugify %}
-      {% assign tag_name = tag | first %}
-      {% assign tag_count = tag | last | size %}
+    {% for tag in unique_tags %}
+      {% assign tag_count = 0 %}
+      {% for note in site.notes %}
+        {% if note.tags contains tag %}
+          {% assign tag_count = tag_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      {% assign tag_slug = tag | slugify %}
       <li class="topic-item">
         <a href="{{ site.baseurl }}/tags/{{ tag_slug }}/" class="topic-link">
-          <span class="topic-name">{{ tag_name }}</span>
-          <span class="topic-count">({{ tag_count }})</span>
+          <span class="topic-name">{{ tag }}</span>
         </a>
       </li>
     {% endfor %}
   </ul>
 </div>
 
-<h2 id="writing">Writing</h2>
+<div class="section-label" id="writing">Writing</div>
   <ul>
     {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
     {% for note in recent_notes limit: 10 %}

@@ -20,7 +20,7 @@ def convert_links(doc)
 
   if open_external_links_in_new_tab
     parsed_doc = Nokogiri::HTML::DocumentFragment.parse(doc.content)
-    parsed_doc.css("a:not(.internal-link):not(.footnote):not(.reversefootnote):not(.latest-label):not(.latest-title-link):not(.read-more)").each do |link|
+    parsed_doc.css("a:not(.internal-link):not(.footnote):not(.reversefootnote):not(.latest-label):not(.latest-title-link):not(.read-more):not(.topic-link)").each do |link|
       link.set_attribute('target', '_blank')
     end
     doc.content = parsed_doc.inner_html

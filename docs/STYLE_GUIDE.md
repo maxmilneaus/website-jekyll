@@ -41,18 +41,23 @@ layout: note
 Our spacing system uses **mathematical relationships** rather than arbitrary values:
 
 ```scss
-/* Base Spacing Scale */
+/* Systematic spacing scale */
 --space-xs: 0.25rem;    /* Base unit */
 --space-sm: 0.5rem;     /* 2x base */
 --space-md: 1rem;       /* 4x base */
 --space-lg: 1.75rem;    /* 7x base */
 --space-xl: 3rem;       /* 12x base */
+
+/* Section rhythm variables */
+--section-spacing: var(--space-xl);
+--section-content-spacing: var(--space-md);
 ```
 
 **Mathematical relationships:**
 - All spacing derives from `0.25rem` base unit
 - Creates harmonic proportions: 1:2:4:7:12
-- Enables consistent scaling across all elements
+- Section rhythm uses semantic variables for global consistency
+- Enables systematic scaling across all elements
 
 ### Universal Spacing Rules
 
@@ -166,6 +171,47 @@ p { margin: var(--space-md) 0 var(--space-lg) 0; } /* 1rem - 1.75rem rhythm */
 - **Meta:** `var(--space-sm)` bottom margin (0.5rem)
 - **Preview:** `var(--space-md)` bottom margin (1rem)
 
+### Refined Component System - Systematic Inheritance
+
+**Base classes for consistent behavior:**
+
+```scss
+/* Base section class - all front page sections inherit this spacing */
+.section {
+  margin: 0 0 var(--section-spacing) 0;
+}
+
+/* Base label class - for all section headers */
+.label {
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-meta);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--section-content-spacing);
+  text-decoration: none !important;
+  display: block;
+}
+```
+
+**Component inheritance pattern:**
+```scss
+.latest-section { @extend .section; }
+.topics-section { @extend .section; }
+.latest-label { @extend .label; }
+.section-label { @extend .label; }
+```
+
+**Front Page Section Headers - Standard Format:**
+```html
+<div class="section-label" id="section-name">Section Name</div>
+```
+
+**Design Benefits:**
+- Single source of truth for spacing and styling
+- Changes to base classes affect all components systematically
+- Reduces CSS duplication and maintenance overhead
+- Maintains visual consistency automatically
+
 ### Section Headers - Universal Pattern
 
 ```scss
@@ -189,6 +235,57 @@ ul a {
 }
 ```
 
+### Tag System Components
+
+#### Topic Links (Homepage)
+```scss
+.topic-link {
+  display: inline-block;
+  background: var(--color-charcoal);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--border-radius);
+  padding: var(--space-xs) var(--space-sm);  /* Factor-based padding */
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--color-graphite);
+    border-color: var(--color-accent-subtle);
+    transform: translateY(-1px);             /* Subtle elevation */
+  }
+}
+```
+
+#### Tag Page Navigation (Steph Ango Pattern)
+```scss
+.tag-page-title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-normal);    /* Slimmer typography */
+  margin-bottom: var(--space-sm);            /* Systematic spacing */
+  color: var(--color-cream);                 /* Tag name in cream */
+  
+  a {
+    color: var(--color-meta);                /* "Topics" link in meta gray */
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--color-accent-hover);      /* Consistent hover state */
+    }
+  }
+}
+
+.tag-meta {
+  color: var(--color-meta);
+  font-size: 1rem;
+  margin-bottom: var(--space-xl);            /* Section spacing consistency */
+}
+```
+
+**Tag Design Principles:**
+- **Color Hierarchy:** "Topics" (meta gray) vs tag name (cream) for clear navigation
+- **Typography:** Slimmer font weight following Steph Ango patterns
+- **Spacing:** Factor-based margins using systematic variables
+- **Interaction:** Subtle hover states with consistent accent colors
+
 ---
 
 ## 6. Systems Guidelines for Future Development
@@ -202,6 +299,10 @@ margin: calc(var(--space-xl) * 1.5) 0;
 
 /* Good - derives from base spacing */
 padding: var(--space-md) var(--space-lg);
+
+/* Good - systematic tag page spacing */
+.tag-page-title { margin-bottom: var(--space-sm); }
+.tag-meta { margin-bottom: var(--space-xl); }
 ```
 
 **❌ DON'T: Use Arbitrary Values**
@@ -211,6 +312,9 @@ margin: 47px 0;
 
 /* Bad - inline styles that can't be systematically updated */
 style="margin-top: 2.3rem;"
+
+/* Bad - inconsistent tag styling */
+.tag-title { margin-bottom: 0.3rem; }
 ```
 
 ### Adding New Components
@@ -219,6 +323,8 @@ style="margin-top: 2.3rem;"
 **2. Colors:** Use existing palette or add systematic variables to `:root`
 **3. Typography:** Follow established hierarchy relationships
 **4. Dividers:** Always use `var(--color-divider)` for consistency
+**5. Navigation:** Use color hierarchy patterns (meta gray for secondary, cream for primary)
+**6. Interactive Elements:** Follow hover state patterns with `var(--color-accent-hover)`
 
 ### Scaling the System
 
@@ -341,3 +447,19 @@ main { margin: calc(var(--space-xl) * 1.25) 0 var(--space-xl) 0; }
 This design system creates **mathematical harmony** through factor-based relationships while maintaining the cozy, contemplative aesthetic. Every spacing decision derives from systematic thinking rather than visual approximation.
 
 **Key Philosophy:** *Changes should improve the entire system, not just individual components.*
+
+### Tag System Integration
+
+The tag system demonstrates systematic design principles:
+
+**Automated Generation:** Jekyll plugin creates consistent page structure
+**Color Hierarchy:** Breadcrumb navigation uses differential colors for clarity
+**Typography Scale:** Follows established font weight and size relationships
+**Spacing Rhythm:** All margins use systematic `--space-*` variables
+**Interaction Patterns:** Hover states follow established accent color system
+
+**Technical Implementation:**
+- Template-driven tag pages ensure visual consistency
+- Manual tag collection handles Jekyll collection limitations
+- Smart pluralization maintains professional content presentation
+- Clean URL structure follows SEO best practices

@@ -14,8 +14,9 @@ layout: note
 1. [Templates System](#templates-system)
 2. [Front Matter Specifications](#front-matter-specifications)
 3. [Collections & Layouts](#collections--layouts)
-4. [Development Workflow](#development-workflow)
-5. [Plugin Configurations](#plugin-configurations)
+4. [Tag System](#tag-system)
+5. [Development Workflow](#development-workflow)
+6. [Plugin Configurations](#plugin-configurations)
 
 ---
 
@@ -117,6 +118,141 @@ All layouts extend default.html
 note.html expects page.title and page.last_modified_at
 project.html expects page.title, page.year, page.status
 projects.html sorts by order then year
+tag.html expects page.tag and uses Jekyll collection filtering
+
+---
+
+## Tag System
+
+### Overview
+The website implements a fully automated tag system that generates individual pages for every unique tag found in notes. This system follows Steph Ango's design patterns for topics navigation.
+
+### Tag Implementation Architecture
+
+#### 1. Tag Collection (`_pages/index.md`)
+```liquid
+{% comment %} Manual tag aggregation since site.tags doesn't work with collections {% endcomment %}
+{% assign all_tags_array = "" | split: "" %}
+{% for note in site.notes %}
+  {% if note.tags %}
+    {% for tag in note.tags %}
+      {% unless all_tags_array contains tag %}
+        {% assign all_tags_array = all_tags_array | push: tag %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+```
+**Technical Note:** Jekyll's `site.tags` doesn't work with custom collections, requiring manual tag aggregation.
+
+#### 2. Automatic Page Generation (`_plugins/tag_generator.rb`)
+```ruby
+class TagPage < Jekyll::Page
+  def initialize(site, base, tag)
+    @site = site
+    @base = base
+    @dir = "tags/#{tag.downcase.gsub(/\s+/, '-')}"
+    @name = 'index.html'
+    
+    self.process(@name)
+    self.read_yaml(File.join(base, '_layouts'), 'tag.html')
+    self.data['tag'] = tag
+    self.data['title'] = tag
+  end
+end
+```
+**Features:**
+- Generates clean URLs: `/tags/design/`, `/tags/development/`
+- Automatic slug creation from tag names
+- Uses `tag.html` layout template
+
+#### 3. Tag Page Template (`_layouts/tag.html`)
+```liquid
+{% assign tagged_notes = site.notes | where_exp: "note", "note.tags contains page.tag" | sort: "last_modified_at_timestamp" | reverse %}
+{% assign note_count = tagged_notes.size %}
+
+<h1 class="tag-page-title">
+  <a href="{{ site.baseurl }}/#topics" class="internal-link">Topics</a> / {{ page.tag | capitalize }}
+</h1>
+
+<p class="tag-meta">{{ note_count }} entr{% if note_count == 1 %}y{% else %}ies{% endif %} about this topic</p>
+```
+**Features:**
+- Automatic capitalization of tag names
+- Smart pluralization for entry counts
+- Steph Ango inspired breadcrumb navigation
+- Chronological listing of tagged notes
+
+### Tag Styling System
+
+#### Breadcrumb Navigation
+```scss
+.tag-page-title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-normal);  /* Slimmer typography */
+  color: var(--color-cream);              /* Tag name in cream */
+  
+  a {
+    color: var(--color-meta);             /* "Topics" link in meta gray */
+    text-decoration: none;
+  }
+}
+```
+**Design Features:**
+- Different colors for hierarchy: "Topics" (meta gray) vs tag name (cream)
+- Slimmer font weight following Steph Ango patterns
+- Systematic spacing using design system variables
+
+#### Topic Links on Homepage
+```scss
+.topic-link {
+  display: inline-block;
+  background: var(--color-charcoal);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--border-radius);
+  padding: var(--space-xs) var(--space-sm);
+  
+  &:hover {
+    background: var(--color-graphite);
+    border-color: var(--color-accent-subtle);
+    transform: translateY(-1px);
+  }
+}
+```
+
+### Adding Tags to Content
+
+#### Front Matter Format
+```yaml
+---
+title: "Note Title"
+layout: note
+tags: [design, process, creativity]
+---
+```
+
+#### Template Integration
+The `_templates/Web Note.md` template includes:
+```yaml
+tags: []
+```
+This ensures all new notes can participate in the tag system.
+
+### Automatic Features
+
+1. **Auto-Generation**: New tags automatically get pages without manual intervention
+2. **Clean URLs**: Systematic slug generation handles spaces and special characters
+3. **Smart Counting**: Proper pluralization for "1 entry" vs "2 entries"
+4. **Link Behavior**: Internal navigation preserves same-page browsing
+5. **Responsive Design**: Follows established design system patterns
+
+### Technical Benefits
+
+- **Scalable**: Handles unlimited tag growth automatically
+- **Consistent**: Uses design system spacing and colors
+- **Maintainable**: Single source of truth for tag page generation
+- **SEO-Friendly**: Clean URLs and proper meta tags
+- **User-Friendly**: Intuitive navigation following established patterns
 Development Workflow
 Adding New Content
 
@@ -164,6 +300,15 @@ This plugin is responsible for two key features:
 It finds all Roam-style [[wiki-links]] within your notes and converts them into standard HTML <a class="internal-link"> tags.
 It processes all notes to find which notes link to others, generating the backlinks data used on the note.html layout. It also generates the _includes/notes_graph.json file used to render the interactive graph visualization.
 Change Log
+June 13, 2025
+
+Tag System: Implemented fully automated tag system with Steph Ango inspired design
+- Added automatic tag page generation via `tag_generator.rb` plugin
+- Created `tag.html` layout template with smart pluralization
+- Implemented manual tag collection for homepage topics section
+- Added capitalization and differential color styling for breadcrumbs
+- Updated templates to include tag support
+
 June 11, 2025
 
 Plugin Fix: Modified the open_external_links_in_new_tab.rb plugin to correctly handle internal links in the "Latest" section.
@@ -173,6 +318,8 @@ Front Matter: Removed complex publishing controls, simplified to essential field
 Documentation: Created technical guide to complement existing style guide.
 Future Enhancements
 [x] Document plugin configurations
+[x] Implement automated tag system
 [ ] Add automated testing for front matter validation
 [ ] Implement template validation scripts
 [ ] Add development environment setup documentation
+[ ] Add tag analytics and usage tracking

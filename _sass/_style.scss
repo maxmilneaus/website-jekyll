@@ -23,12 +23,16 @@
   --font-weight-medium: 500;
   --font-weight-bold: 600;
   
-  /* Cozy spacing */
+  /* Systematic spacing scale */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.75rem;
   --space-xl: 3rem;
+  
+  /* Section rhythm variables */
+  --section-spacing: var(--space-xl);
+  --section-content-spacing: var(--space-md);
   
   /* Reading-optimized layout */
   --border-radius: 3px;
@@ -105,19 +109,31 @@ h1 + p, h2 + p, h3 + p {
   margin-top: calc(var(--space-md) * 0.75);
 }
 
-/* Latest Section - Steph Ango inspired design */
-.latest-section {
-  margin: 0 0 calc(var(--space-xl) * 1.5) 0;
+/* =============================================================================
+   SECTION SYSTEM - Unified spacing and behavior
+   ============================================================================= */
+
+/* Base section class - all front page sections inherit this spacing */
+.section {
+  margin: 0 0 var(--section-spacing) 0;
 }
 
-.latest-label {
-  font-size: 1rem;                        /* Match other elements */
+.latest-section {
+  @extend .section;
+}
+
+/* =============================================================================
+   LINK SYSTEM - Unified link behavior patterns
+   ============================================================================= */
+
+/* Base label class - for all section headers */
+.label {
+  font-size: 1rem;
   font-weight: var(--font-weight-normal);
-  color: var(--color-meta);               /* Same color as meta/preview */
-  font-variant: normal;
+  color: var(--color-meta);
   letter-spacing: 0.03em;
-  margin-bottom: var(--space-md);         /* Increased spacing to title */
-  text-decoration: none;
+  margin-bottom: var(--section-content-spacing);
+  text-decoration: none !important;
   display: block;
   
   &:hover {
@@ -125,13 +141,24 @@ h1 + p, h2 + p, h3 + p {
   }
 }
 
-.latest-title-link {
-  text-decoration: none;
+/* Title link - for prominent headings that are clickable */
+.title-link {
+  text-decoration: none !important;
   color: var(--color-accent-subtle);
 
-  &:hover .latest-title {
+  &:hover .title {
     color: var(--color-accent-hover);
   }
+}
+
+/* Apply base classes to specific components */
+.latest-label,
+.section-label {
+  @extend .label;
+}
+
+.latest-title-link {
+  @extend .title-link;
 }
 
 .latest-title {
@@ -170,26 +197,12 @@ h1 + p, h2 + p, h3 + p {
   }
 }
 
-/* Section Labels - consistent styling across Latest, Topics, Writing */
-.section-label {
-  font-size: 1rem;                        /* Match latest-label size */
-  font-weight: var(--font-weight-normal);
-  color: var(--color-meta);
-  font-variant: normal;
-  letter-spacing: 0.03em;                 /* Consistent letter spacing */
-  margin-bottom: var(--space-md);         /* Match latest-label spacing */
-  text-decoration: none;
-  display: block;
-}
+/* Section labels inherit from base label class - no separate definition needed */
 
-/* Topics Section */
-.topics-section {
-  margin: var(--space-lg) 0;                      /* Consistent with latest section */
-}
-
-/* Writing Section */
+.topics-section,
 .writing-section {
-  margin: var(--space-lg) 0;                      /* Consistent spacing */
+  @extend .section;
+  margin-top: 0; /* No top margin - spacing handled by HR and section labels */
 }
 
 .topics-list {
@@ -239,9 +252,38 @@ p {
   color: var(--color-cream);
 }
 
-/* Navigation - minimal, Steph-inspired */
+/* =============================================================================
+   NAVIGATION SYSTEM
+   ============================================================================= */
+
+/* Tag page styling - Steph Ango inspired */
+.tag-page-title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-normal);  /* Slimmer font weight */
+  margin-bottom: var(--space-sm);
+  line-height: 1.15;
+  color: var(--color-cream);              /* Tag name in cream */
+  
+  a {
+    color: var(--color-meta);             /* Topics link in meta gray */
+    text-decoration: none;
+    font-weight: var(--font-weight-normal); /* Match slimmer weight */
+    
+    &:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+}
+
+.tag-meta {
+  color: var(--color-meta);
+  font-size: 1rem;
+  margin-bottom: var(--space-xl);
+  margin-top: 0;
+}
+
 nav {
-  margin: 0 0 0 0;                 /* Remove bottom margin for tighter spacing to Latest */
+  margin: 0;
   padding: 0;
 
   > div {
@@ -250,7 +292,7 @@ nav {
     align-items: center;
   }
 
-  /* Remove underlines from ALL navigation links */
+  /* Navigation links have no underlines */
   a {
     text-decoration: none !important;
   }
@@ -258,23 +300,21 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: var(--space-lg);                   /* Slightly wider gap for elegance */
-}
+  gap: var(--space-lg);
 
-.nav-links a {
-  color: var(--color-warm-gray);           /* Darker shade like Steph's About/Now */
-  text-decoration: none;
-  font-weight: var(--font-weight-normal);  /* Thinner, more elegant */
-  letter-spacing: 0.01em;
-  transition: color 200ms ease;
-  padding: 0;                              /* Remove padding for cleaner look */
-  
-  &:hover {
-    color: var(--color-accent-hover) !important; /* Force consistent hover color */
+  a {
+    color: var(--color-warm-gray);
+    font-weight: var(--font-weight-normal);
+    letter-spacing: 0.01em;
+    transition: color 200ms ease;
+    
+    &:hover {
+      color: var(--color-accent-hover) !important;
+    }
   }
 }
 
-/* Links - classic underlines with blue highlighting */
+/* Base link styling - all links inherit these properties */
 a {
   color: var(--color-stone);
   text-decoration: underline;
@@ -288,17 +328,9 @@ a {
   }
 }
 
-/* Internal links - ensure they have visible underlines */
+/* Internal links inherit base styling - no separate definition needed */
 .internal-link {
-  text-decoration: underline;                                          /* Forces underline display */
-  text-decoration-color: var(--color-stone);                          /* Default underline color matches text */
-  text-underline-offset: 0.2em;                                       /* Positions underline below text */
-  transition: color 200ms ease, text-decoration-color 200ms ease;     /* Smooth color transitions */
-
-  &:hover {                                                            /* Hover state styling */
-    color: var(--color-accent-hover);                                  /* Text turns blue on hover */
-    text-decoration-color: var(--color-accent-hover);                  /* Underline turns blue on hover */
-  }
+  /* Inherits all base link styles */
 }
 
 /* External link styling */
@@ -347,13 +379,16 @@ a {
   color: var(--color-cream) !important;
 }
 
-/* Content containers */
+/* =============================================================================
+   LAYOUT CONTAINERS
+   ============================================================================= */
+
 main {
-  margin: calc(var(--space-xl) * 1.25) 0 var(--space-xl) 0;
+  margin: calc(var(--section-spacing) * 1.25) 0 var(--section-spacing) 0;
 }
 
 footer {
-  margin: var(--space-xl) 0 var(--space-lg) 0;
+  margin: var(--section-spacing) 0 var(--space-lg) 0;
   padding: var(--space-lg) 0;
   border-top: 1px solid var(--color-divider);
   color: var(--color-warm-gray);
@@ -366,35 +401,37 @@ footer {
   margin: var(--space-xl) 0 var(--space-md) 0;
 }
 
-/* Lists - cozy and readable */
-ul, ol {
+/* =============================================================================
+   CONTENT ELEMENTS - Typography and spacing
+   ============================================================================= */
+
+/* Standard lists (not article lists) */
+ol {
   margin: var(--space-md) 0 var(--space-lg) 0;
   padding-left: var(--space-lg);
+
+  li {
+    margin: var(--space-sm) 0;
+    color: var(--color-cream);
+  }
 }
 
-li {
-  margin: var(--space-sm) 0;
-  color: var(--color-cream);
-}
-
-/* Time elements - consistent styling across pages and notes */
 time {
   display: block;
   color: var(--color-warm-gray);
-  margin: 0.5em 0 1.5em;
+  margin: var(--space-sm) 0 var(--space-lg);
   font-size: 0.85rem;
   font-weight: var(--font-weight-medium);
   letter-spacing: 0.02em;
 }
 
-/* Article headers - clean spacing */
 article {
   margin-bottom: var(--space-lg);
-}
 
-article h1 {
-  margin-bottom: var(--space-sm);
-  margin-top: 0;
+  h1 {
+    margin-bottom: var(--space-sm);
+    margin-top: 0;
+  }
 }
 
 /* Images - warm presentation */
@@ -418,12 +455,11 @@ blockquote {
   p { margin: 0; }
 }
 
-/* Horizontal rules - systematic breathing room with factor-based spacing */
 hr {
   width: 100%;
   border: 0;
   height: 1px;
-  margin: calc(var(--space-xl) * 1) 0 calc(var(--space-xl) * 1.5) 0;
+  margin: var(--section-spacing) 0;
   background: var(--color-divider);
 }
 
@@ -472,46 +508,58 @@ pre {
   cursor: help;
 }
 
-/* REFINED ARTICLE LIST (now targeting h3 + ul) */
-ul {
+/* =============================================================================
+   ARTICLE LIST SYSTEM - Writing section grid layout
+   ============================================================================= */
+
+/* Article list container */
+.article-list {
   list-style: none;
   padding: 0;
   margin: 0;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: var(--space-xs);
+    align-items: baseline;
+    text-decoration: none !important;
+    padding: 0;
+
+    &:hover .article-title {
+      color: var(--color-accent-hover);
+      text-decoration-color: var(--color-accent-hover);
+    }
+  }
 }
-ul li {
-  margin: 0 0 0.0rem 0; /* CORRECTED: This resets top/right/left margins and sets a tight bottom margin, fixing the spacing bug. */
-}
-ul a {
-  display: grid;
-  grid-template-columns: auto auto 1fr; /* 3 columns: Date | Separator | Title */
-  gap: 0.25rem;
-  align-items: baseline;
-  text-decoration: none !important;
-  padding: 0.0rem 0;
-}
-/* This rule now ONLY targets the title for hover */
-ul a:hover .article-title {
-  color: var(--color-accent-hover);
-  text-decoration-color: var(--color-accent-hover);
-}
+
 .article-date {
   font-family: var(--font-mono);
-  color: var(--color-meta); /* Match section header color */
+  color: var(--color-meta);
   font-size: 0.9em;
-  margin-right: .5rem;
   text-decoration: none !important;
 }
+
 .article-separator {
   color: var(--color-stone);
-  margin-right: .5rem;
   text-decoration: none !important;
 }
+
 .article-title {
   color: var(--color-cream);
   text-decoration: underline;
   text-decoration-color: var(--color-stone);
-  text-underline-offset: 0.15em;              /* Better underline positioning */
+  text-underline-offset: 0.15em;
   transition: color 200ms ease, text-decoration-color 200ms ease;
+}
+
+/* Apply article list class to writing section ul */
+ul {
+  @extend .article-list;
 }
 
 /* --- PROJECTS PAGE GRID --- */
