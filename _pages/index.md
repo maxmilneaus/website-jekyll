@@ -58,6 +58,8 @@ permalink: /
   </ul>
 </div>
 
+<hr class="section-divider">
+
 <div class="section-label" id="writing">Writing</div>
   <ul>
     {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}

@@ -78,6 +78,23 @@ hr {
 /* Creates 3rem top and bottom for consistent visual rhythm */
 ```
 
+### Section Dividers
+
+A dedicated class for horizontal rules used as section dividers, ensuring consistent spacing and visual rhythm between major content blocks.
+
+```scss
+.section-divider {
+  @extend hr;
+  margin-top: 0; /* Removes top margin to prevent double spacing with preceding section */
+  margin-bottom: var(--section-spacing); /* Consistent spacing after the divider */
+}
+```
+
+**Design Principles:**
+- **Visual Rhythm:** Creates clear separation between sections while maintaining consistent vertical spacing.
+- **Reusability:** A single class for all section dividers, promoting consistency and ease of maintenance.
+- **Systematic Spacing:** Utilizes `--section-spacing` for predictable layout.
+
 **Systems Benefits:**
 - ✅ **Universal consistency** - One rule affects all pages
 - ✅ **Mathematical harmony** - 2:3 proportional relationships
@@ -224,6 +241,64 @@ p { margin: var(--space-md) 0 var(--space-lg) 0; } /* 1rem - 1.75rem rhythm */
 }
 ```
 
+### Navigation Breadcrumb
+
+The breadcrumb navigation has been added to the main navigation bar for individual note pages, providing clear hierarchical context.
+
+```scss
+.nav-breadcrumb-separator {
+  color: var(--color-warm-gray);            /* Separator color */
+  margin: 0 var(--space-xs);                /* Small spacing around separator */
+}
+
+.nav-breadcrumb-item {
+  color: var(--color-meta);                 /* Category link color, same as section labels */
+  text-decoration: none;                    /* No underline by default */
+  
+  &:hover {
+    color: var(--color-accent-hover);       /* Consistent hover color */
+    text-decoration: underline;             /* Underline on hover for clarity */
+    text-underline-offset: 0.2em;
+  }
+}
+```
+
+**Structure:** `Max Milne / Writing` (or relevant category)
+- "Max Milne" links to the homepage.
+- "Writing" (or category) links to the top of the index page.
+- The current note title is implicitly understood as the page title and is not part of the clickable breadcrumb.
+
+### Footer Animation and Caption Alignment
+
+The footer animation and its accompanying caption are now aligned to the left, providing a consistent visual flow with the rest of the page content.
+
+```scss
+/* _sass/_style.scss */
+.stove-signature {
+  text-align: left; /* Aligns the caption and the animation container */
+  margin: var(--space-xl) 0 var(--space-md) 0;
+}
+
+/* _sass/_animations.scss */
+.goldsworthy-fragments {
+  /* Removed 'margin: 0 auto;' to allow left alignment */
+  position: relative;
+  width: 80px;
+  height: 60px;
+  animation: natural-breath 8s ease-in-out infinite;
+}
+```
+
+**Design Principles:**
+- **Consistency:** Aligns with the overall left-aligned content flow of the site.
+- **Clarity:** Ensures the caption is easily readable and associated with the animation.
+- **Systematic Spacing:** Continues to use `var(--space-xl)` and `var(--space-md)` for vertical rhythm.
+
+**Design Principles:**
+- **Clarity:** Provides immediate context of the note's position within the site hierarchy.
+- **Consistency:** Uses existing color variables (`--color-meta`, `--color-warm-gray`, `--color-accent-hover`) and spacing (`--space-xs`).
+- **Interaction:** Follows established link hover patterns.
+
 ### Article Lists - Grid System
 
 ```scss
@@ -362,6 +437,15 @@ a {
 a:hover {
   color: var(--color-accent-hover);              /* Blue hover */
   text-decoration-color: var(--color-accent-hover); /* Matching underline */
+}
+```
+
+**Special Case: Latest Note Title Hover**
+The latest note title heading has a unique hover behavior where only the text color changes (without underline change) to maintain visual hierarchy:
+
+```scss
+.latest-title-link:hover .latest-title {
+  color: var(--color-accent-hover);
 }
 ```
 

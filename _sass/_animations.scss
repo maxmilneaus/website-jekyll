@@ -1,18 +1,19 @@
 // Animations for Goldsworthy Fragments
 // Therapeutic, contemplative animations inspired by VOICE project
 
-/* Goldsworthy Fragments - Broken and Beautifully Rearranged */
+/* Goldsworthy Fragments - Broken and Beautifully Rearranged (BACKUP) */
+/*
 .goldsworthy-fragments {
   position: relative;
   width: 80px;
   height: 60px;
-  margin: 0 auto;
   animation: natural-breath 8s ease-in-out infinite;
 }
 
 /* VOICE Fragments - Therapeutic Collaboration Energy */
 
 /* Fragment 1 - Vulnerable confession (broken circle, opening up) */
+/*
 .fragment-1 {
   position: absolute;
   top: 5px;
@@ -28,6 +29,7 @@
 }
 
 /* Fragment 2 - Collaborative voices (overlapping circles) */
+/*
 .fragment-2 {
   position: absolute;
   top: 18px;
@@ -45,6 +47,7 @@
 }
 
 /* Fragment 3 - Therapeutic process flow */
+/*
 .fragment-3 {
   position: absolute;
   top: 38px;
@@ -63,6 +66,7 @@
 }
 
 /* Fragment 4 - Personal breakthrough (irregular, breaking apart) */
+/*
 .fragment-4 {
   position: absolute;
   top: 10px;
@@ -76,6 +80,7 @@
 }
 
 /* Fragment 5 - Core therapeutic essence (warm, pulsing heart) */
+/*
 .fragment-5 {
   position: absolute;
   top: 28px;
@@ -89,6 +94,7 @@
 }
 
 /* Ambient field around fragments */
+/*
 .goldsworthy-fragments::before {
   content: '';
   position: absolute;
@@ -108,7 +114,7 @@
 }
 
 /* VOICE-specific therapeutic animations */
-
+/*
 @keyframes natural-breath {
   0%, 100% {
     transform: scale(1);
@@ -221,6 +227,7 @@
     transform: translate(-50%, -50%) scale(1.05);
   }
 }
+*/
 
 .stove-caption {
   font-size: 0.8rem;
@@ -228,4 +235,68 @@
   margin: 0;
   opacity: 0.7;
   font-style: italic;
+}
+/* * --- RESTING EMBER ICON CODE ---
+ * The following CSS is required for the icon.
+ */
+
+/* Base styles for the icon container */
+.icon-base {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.icon-base:hover {
+    transform: scale(1.1);
+}
+
+.icon-base:hover * {
+    animation-play-state: paused !important;
+}
+
+/* Keyframe for the glowing animation */
+@keyframes ember-glow {
+    0% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.8;
+        box-shadow: 0 0 10px 3px var(--color-accent-secondary);
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+
+/* Specific styles for the Resting Ember */
+.ember {
+    background: var(--color-charcoal);
+    border-radius: 63% 37% 54% 46% / 58% 44% 56% 42%;
+    border: 1px solid var(--color-stone);
+    animation: ember-glow 6s ease-in-out infinite;
+}
+
+.ember .ash {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--color-deep);
+    border-radius: 50%;
+}
+
+.ember .ash-1 {
+    top: 30%;
+    left: 50%;
+}
+
+.ember .ash-2 {
+    top: 50%;
+    left: 30%;
+}
+
+.ember:hover {
+    border-color: var(--color-accent-primary);
 }

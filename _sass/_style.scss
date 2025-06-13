@@ -12,6 +12,8 @@
   --color-meta: #9c958c;              /* Between warm-gray and stone */
   --color-accent-hover: #93c5fd;
   --color-accent-subtle: #3b82f6;     /* Subtle blue accent */
+  --color-accent-primary: #fcd34d;
+  --color-accent-secondary: #fca5a5;
   
   /* System colors for consistent dividers */
   --color-divider: var(--color-stone); /* var(--color-stone) with systematic opacity */
@@ -286,10 +288,16 @@ nav {
   margin: 0;
   padding: 0;
 
-  > div {
+  .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
   }
 
   /* Navigation links have no underlines */
@@ -316,9 +324,9 @@ nav {
 
 /* Base link styling - all links inherit these properties */
 a {
-  color: var(--color-stone);
+  color: var(--color-cream);
   text-decoration: underline;
-  text-decoration-color: var(--color-stone);
+  text-decoration-color: var(--color-cream);
   text-underline-offset: 0.2em;
   transition: color 200ms ease, text-decoration-color 200ms ease;
 
@@ -397,7 +405,7 @@ footer {
 
 /* Goldsworthy Fragments - animations moved to _animations.scss */
 .stove-signature {
-  text-align: center;
+  text-align: left; /* Changed from center to left */
   margin: var(--space-xl) 0 var(--space-md) 0;
 }
 
@@ -461,6 +469,12 @@ hr {
   height: 1px;
   margin: var(--section-spacing) 0;
   background: var(--color-divider);
+}
+
+.section-divider {
+  @extend hr;
+  margin-top: 0; /* Remove top margin to prevent double spacing */
+  margin-bottom: var(--section-spacing);
 }
 
 /* Code - warm, functional */
@@ -670,3 +684,4 @@ ul {
   color: var(--color-warm-gray);
   line-height: 1.6;
 }
+
