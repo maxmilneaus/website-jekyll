@@ -69,14 +69,6 @@ body {
   }
 }
 
-/* Index page content - larger text for better readability */
-#home main {
-  font-size: 1.12rem;
-
-  @media (min-width: 820px) {
-    font-size: 1.18rem;
-  }
-}
 
 ::selection {
   background-color: rgba(147, 197, 253, 0.4);
@@ -566,7 +558,11 @@ pre {
   a {
     display: grid;
     grid-template-columns: auto auto 1fr;
+<<<<<<< Updated upstream
     gap: var(--space-xs);
+=======
+    gap: var(--space-lg);
+>>>>>>> Stashed changes
     align-items: baseline;
     text-decoration: none !important;
     padding: 0;

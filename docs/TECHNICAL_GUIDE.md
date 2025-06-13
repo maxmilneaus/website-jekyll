@@ -17,6 +17,7 @@ layout: note
 4. [Tag System](#tag-system)
 5. [Development Workflow](#development-workflow)
 6. [Plugin Configurations](#plugin-configurations)
+7. [Obsidian to Jekyll Sync](#obsidian-to-jekyll-sync)
 
 ---
 
@@ -323,3 +324,158 @@ Future Enhancements
 [ ] Implement template validation scripts
 [ ] Add development environment setup documentation
 [ ] Add tag analytics and usage tracking
+---
+
+## Obsidian to Jekyll Sync
+
+### Overview
+This section details the robust one-way synchronization process from an Obsidian vault to the Jekyll website, ensuring content is always up-to-date while maintaining vault privacy. The sync uses `rsync` and `launchd` for efficient, near real-time updates.
+
+### Why This Approach?
+- **Reliability**: Avoids issues with symbolic links and iCloud, working seamlessly with Obsidian and Jekyll.
+- **Real-time Updates**: Event-driven triggers (within 1-2 seconds of changes) or interval-based sync (every 2 minutes).
+- **Privacy**: Your Obsidian vault remains completely private.
+- **One-way Flow**: All changes flow exclusively from Obsidian to Jekyll. **Never edit files directly in Jekyll; changes will be overwritten.**
+
+### Key Components
+
+#### 1. Sync Script (`sync_to_jekyll.sh`)
+This script uses `rsync` to transfer files from the Obsidian vault to the Jekyll project. It includes a lock mechanism to prevent multiple sync instances from running concurrently.
+
+```bash
+#!/bin/bash
+LOCK_FILE="/tmp/sync_to_jekyll.lock"
+
+if [ -e "$LOCK_FILE" ]; then
+    echo "Sync skipped: Previous instance still running at $(date)" >> /tmp/sync_to_jekyll.log
+    exit 0
+fi
+
+touch "$LOCK_FILE"
+trap 'rm -f "$LOCK_FILE"' EXIT
+
+SOURCE="/Users/maxmilne/Library/Mobile Documents/iCloud~md~obsidian/Documents/aVault/Website/"
+DESTINATION="/Volumes/aWork Drive/1. Projects/Website/"
+
+echo "Starting smart sync at $(date)" >> /tmp/sync_to_jekyll.log
+rsync -avu \
+    --exclude='.obsidian/' \
+    --exclude='*.canvas' \
+    --exclude='*.excalidraw' \
+    --exclude='*.trash' \
+    "$SOURCE" "$DESTINATION" >> /tmp/sync_to_jekyll.log 2>> /tmp/sync_to_jekyll_error.log
+echo "Sync completed at $(date)" >> /tmp/sync_to_jekyll.log
+```
+
+**Script Details:**
+- **`LOCK_FILE`**: Ensures only one instance of the script runs at a time.
+- **`SOURCE`**: Path to your Obsidian vault's target folder.
+- **`DESTINATION`**: Path to your Jekyll project root.
+- **`rsync -avu`**:
+    - `-a`: Archive mode (preserves permissions, ownership, timestamps, etc.).
+    - `-v`: Verbose output.
+    - `-u`: Skips files that are newer on the destination.
+- **Exclusions**: Prevents Obsidian-specific files and temporary files from being synced.
+- **Logging**: Outputs sync activity to `/tmp/sync_to_jekyll.log` and errors to `/tmp/sync_to_jekyll_error.log`.
+
+#### 2. Launchd Service (`com.maxmilne.synctojekyll.plist`)
+This `launchd` plist file configures the macOS system to run the `sync_to_jekyll.sh` script automatically.
+
+**Option A: Event-Driven Sync (Recommended for real-time updates)**
+Triggers within 1-2 seconds of changes in your Obsidian vault.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.maxmilne.synctojekyll</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Volumes/aWork Drive/1. Projects/Website/sync_to_jekyll.sh</string>
+    </array>
+    <key>WatchPaths</key>
+    <array>
+        <string>/Users/maxmilne/Library/Mobile Documents/iCloud~md~obsidian/Documents/aVault/Website/</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/sync_to_jekyll.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/sync_to_jekyll_error.log</string>
+</dict>
+</plist>
+```
+
+**Option B: Interval-Based Sync (Every 2 minutes)**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.maxmilne.synctojekyll</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/maxmilne/scripts/sync_to_jekyll.sh</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>120</integer>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/sync_to_jekyll.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/sync_to_jekyll_error.log</string>
+</dict>
+</plist>
+```
+
+**Launchd Configuration Details:**
+- **`Label`**: Unique identifier for the launchd service.
+- **`ProgramArguments`**: Specifies the path to the sync script.
+- **`WatchPaths` (Event-Driven)**: Monitors the Obsidian vault directory for changes and triggers the script.
+- **`StartInterval` (Interval-Based)**: Runs the script every 120 seconds (2 minutes).
+- **`RunAtLoad`**: Executes the script once when the service is loaded.
+- **`StandardOutPath` / `StandardErrorPath`**: Redirects script output and errors to log files.
+
+### Setup and Management
+
+#### Initial Synchronization
+1. **Make script executable**: `chmod +x sync_to_jekyll.sh`
+2. **Run setup script**: `chmod +x setup_obsidian_sync.sh && ./setup_obsidian_sync.sh` (This script performs the first sync and configures `.gitignore`).
+
+#### Loading and Starting the Service
+```zsh
+# Unload old service (if any)
+launchctl unload ~/Library/LaunchAgents/com.maxmilne.synctojekyll.plist
+
+# Load new service
+launchctl load ~/Library/LaunchAgents/com.maxmilne.synctojekyll.plist
+
+# Start the service (for interval-based sync, or to trigger initial event-driven sync)
+launchctl start com.maxmilne.synctojekyll
+```
+
+#### Verification
+- **Monitor logs**: `tail -f /tmp/sync_to_jekyll.log`
+- **Check for errors**: `cat /tmp/sync_to_jekyll_error.log`
+
+#### Maintenance
+- **Stop sync**: `launchctl unload ~/Library/LaunchAgents/com.maxmilne.synctojekyll.plist`
+- **Adjust frequency (interval-based)**: Edit `StartInterval` value (seconds) in the plist.
+- **View logs**: Check `/tmp/sync_to_jekyll*.log` files.
+
+### Current Status and Improvements
+- **Script Functionality**: Verified working through manual execution.
+- **Lock Mechanism**: Prevents overlapping sync operations.
+
+**Areas for Improvement:**
+1. **Launchd Troubleshooting**: Resolve "Input/output error" during service reload; investigate alternative service managers.
+2. **Performance Optimization**: Add `rsync` progress reporting; implement incremental sync for large files.
+3. **Error Handling**: Add email/SMS notifications for failures; implement retry mechanism for transient errors.
+4. **Monitoring**: Add health check endpoint; implement log rotation.
+5. **Security**: Encrypt sensitive paths in configuration; add checksum verification.
