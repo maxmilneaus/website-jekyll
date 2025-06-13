@@ -393,7 +393,7 @@ a {
 }
 
 /* Site title - consistent highlighting */
-.site-title a {
+.site-title {
   color: var(--color-cream);
   font-weight: 300;                        /* Lighter than nav links (400) for distinction */
   text-decoration: none;
@@ -560,13 +560,13 @@ pre {
   margin: 0;
 
   li {
-    margin: 0;
+    margin: var(--space-sm) 0;
   }
 
   a {
     display: grid;
-    grid-template-columns: auto auto 1fr;
-    gap: var(--space-xs);
+    grid-template-columns: auto auto .5fr;
+    gap: var(--space-xl);
     align-items: baseline;
     text-decoration: none !important;
     padding: 0;

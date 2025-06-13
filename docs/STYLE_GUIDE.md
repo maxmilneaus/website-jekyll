@@ -301,14 +301,27 @@ The footer animation and its accompanying caption are now aligned to the left, p
 
 ### Article Lists - Grid System
 
+Following Steph Ango's generous spacing patterns:
+
 ```scss
-ul a {
-  display: grid;
-  grid-template-columns: auto auto 1fr;     /* Date | Separator | Title */
-  gap: 0.25rem;                             /* Quarter-unit spacing */
-  align-items: baseline;
+.article-list {
+  li {
+    margin: var(--space-sm) 0;               /* 0.5rem vertical spacing between entries */
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: auto auto 1fr;     /* Date | Separator | Title */
+    gap: var(--space-sm);                     /* 0.5rem spacing for readability */
+    align-items: baseline;
+  }
 }
 ```
+
+**Design Principles:**
+- **Generous Spacing:** Uses `--space-sm` (0.5rem) instead of `--space-xs` for better readability
+- **Vertical Rhythm:** Consistent spacing between entries matches Steph's breathing room
+- **Systematic Scaling:** Uses design system variables for maintenance
 
 ### Tag System Components
 

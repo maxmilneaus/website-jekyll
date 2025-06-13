@@ -1,0 +1,5 @@
+embeddings_recommendations:
+  enabled: true
+  similarity_threshold: 0.5
+  max_recommendations: 5
+  cache_similarities: true

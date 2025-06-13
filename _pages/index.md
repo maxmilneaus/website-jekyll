@@ -7,8 +7,6 @@ permalink: /
 {% assign latest_note = site.notes | sort: "last_modified_at_timestamp" | reverse | first %}
 {% if latest_note %}
   {% assign content_text = latest_note.content | strip_html | strip_newlines | truncate: 120 %}
-  {% assign word_count = latest_note.content | strip_html | number_of_words %}
-  {% assign reading_time = word_count | divided_by: 200 | plus: 1 %}
 
   <div class="latest-section">
     <a href="{{ site.baseurl }}{{ latest_note.url }}" class="latest-label internal-link">Latest</a>
@@ -17,8 +15,6 @@ permalink: /
     </a>
     <div class="latest-meta">
       <span class="latest-date">{{ latest_note.last_modified_at | date: "%B %d, %Y" }}</span>
-      <span class="latest-separator">·</span>
-      <span class="latest-reading-time">{{ reading_time }} minute read</span>
     </div>
     <p class="latest-preview">{{ content_text }} <a href="{{ site.baseurl }}{{ latest_note.url }}" class="read-more internal-link">Keep reading →</a></p>
   </div>

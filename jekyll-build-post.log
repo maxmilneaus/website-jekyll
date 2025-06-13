@@ -1,0 +1,8 @@
+Calling `DidYouMean::SPELL_CHECKERS.merge!(error_name => spell_checker)' has been deprecated. Please call `DidYouMean.correct_error(error_name, spell_checker)' instead.
+Configuration file: /Volumes/aWork Drive/1. Projects/Website/_config.yml
+            Source: /Volumes/aWork Drive/1. Projects/Website
+       Destination: /Volumes/aWork Drive/1. Projects/Website/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 1.241 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.
