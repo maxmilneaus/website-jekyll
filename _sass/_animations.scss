@@ -229,13 +229,6 @@
 }
 */
 
-.stove-caption {
-  font-size: 0.8rem;
-  color: var(--color-warm-gray);
-  margin: 0;
-  opacity: 0.7;
-  font-style: italic;
-}
 /* * --- RESTING EMBER ICON CODE ---
  * The following CSS is required for the icon.
  */
@@ -299,4 +292,61 @@
 
 .ember:hover {
     border-color: var(--color-accent-primary);
+}
+
+.stove-signature {
+  margin-left: auto; /* Pushes the element to the right */
+}
+/* --- THE LEAP OF INSIGHT ICON CODE --- */
+/* Base styles for the icon container */
+.icon-base.the-leap {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.icon-base.the-leap:hover {
+  transform: scale(1.15);
+}
+
+.icon-base.the-leap:hover * {
+  animation-play-state: paused !important;
+}
+
+/* Keyframe for the sparking leap animation */
+@keyframes leap-spark {
+  0% {
+    stroke-dashoffset: 130;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -130;
+  }
+}
+
+/* Specific styles for The Leap of Insight icon */
+.the-leap svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* The static platforms now use the subtle `--color-stone` */
+.the-leap svg .path {
+  stroke: var(--color-stone);
+  stroke-width: 2;
+  fill: none;
+}
+
+/* The spark now uses the primary `--color-accent-hover` for a consistent feel */
+.the-leap svg .spark {
+  stroke: var(--color-accent-hover);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 10 120;
+  animation: leap-spark 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px var(--color-accent-hover));
 }

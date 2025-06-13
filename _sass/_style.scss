@@ -344,6 +344,7 @@ a {
   text-decoration: underline;
   text-decoration-color: var(--color-meta);
   text-underline-offset: 0.2em;
+  text-decoration-skip-ink: none;
   transition: color 200ms ease, text-decoration-color 200ms ease;
 
   &:hover {
