@@ -1,9 +1,11 @@
 ---
-layout: page
+layout: note
 title: Topics
 id: topics
 permalink: /topics
 ---
+
+# Topics
 
 {% comment %}
 Build tags collection manually from notes collection

@@ -24,8 +24,8 @@ permalink: /
   </div>
   <hr>
 {% endif %}
+<a href="{{ site.baseurl }}/topics" class="section-label internal-link" id="topics">Topics</a>
 <div class="topics-section">
-  <a href="{{ site.baseurl }}/topics" class="section-label internal-link" id="topics">Topics</a>
   {% comment %}
   Build tags collection manually from notes collection
   {% endcomment %}
@@ -58,10 +58,9 @@ permalink: /
   </ul>
 </div>
 
-<hr>
+<hr class="section-divider">
 
-<div class="writing-section">
-  <a href="{{ site.baseurl }}/writing" class="section-label internal-link" id="writing">Writing</a>
+<a href="{{ site.baseurl }}/" class="section-label internal-link" id="writing">Writing</a>
   <ul>
     {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
     {% for note in recent_notes limit: 10 %}
@@ -74,5 +73,4 @@ permalink: /
     </li>
     {% endfor %}
   </ul>
-</div>
 

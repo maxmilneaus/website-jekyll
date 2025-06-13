@@ -1,93 +1,90 @@
-# Obsidian to Jekyll Sync Setup
+# Obsidian to Jekyll Sync Setup (Robust Method)
 
-To set up a one-way sync from your Obsidian vault to this Jekyll project, follow these steps:
+This guide implements a reliable one-way sync using `rsync` and `launchd` to keep your Jekyll site updated with changes from your Obsidian vault, while maintaining vault privacy.
 
-## 1. Run the Automated Setup Script
+## Why This Approach?
+- Avoids potential issues with symbolic links and iCloud
+- Works reliably with Obsidian and Jekyll
+- Provides near real-time updates (every 2 minutes)
+- Preserves your vault's privacy
 
-This script handles all setup tasks:
+## Setup Instructions
 
-```zsh
-# Make script executable
-chmod +x setup_obsidian_sync.sh
+### 1. Create the Synchronization Script
 
-# Run the setup script
-./setup_obsidian_sync.sh
-```
-
-The script will:
-1. Create backups of existing directories
-2. Set up symbolic links for notes, pages, and projects
-3. Update .gitignore to exclude Obsidian-specific files
-
-## 2. Set Up Asset Synchronization (Optional)
-
-For automatic asset synchronization:
-
-1. **Create the sync script** (`obsidian_sync.sh`):
-```zsh
-#!/bin/zsh
-
-# Obsidian to Jekyll Sync Script (Assets only)
-# This script synchronizes asset changes from Obsidian vault to Jekyll project
-
-OBSIDIAN_ASSETS="/Users/maxmilne/Library/Mobile Documents/iCloud~md~obsidian/Documents/aVault/Website/assets/"
-JEKYLL_ASSETS="/Volumes/aWork Drive/1. Projects/Website/assets/"
-
-echo "Syncing assets from Obsidian to Jekyll at $(date)" >> /tmp/obsidian_sync.log
-rsync -av \
+1. **Create `sync_to_jekyll.sh`** in your Jekyll project root:
+```bash
+#!/bin/bash
+SOURCE="/Users/maxmilne/Library/Mobile Documents/iCloud~md~obsidian/Documents/aVault/Website/"
+DESTINATION="/Volumes/aWork Drive/1. Projects/Website/"
+rsync -av --delete \
     --exclude='.obsidian/' \
-    "$OBSIDIAN_ASSETS" \
-    "$JEKYLL_ASSETS" >> /tmp/obsidian_sync.log 2>> /tmp/obsidian_sync_error.log
-echo "Asset sync completed." >> /tmp/obsidian_sync.log
+    --exclude='*.canvas' \
+    --exclude='*.excalidraw' \
+    --exclude='*.trash' \
+    "$SOURCE" "$DESTINATION"
 ```
 
 2. **Make it executable**:
 ```zsh
-chmod +x obsidian_sync.sh
+chmod +x sync_to_jekyll.sh
 ```
 
-3. **Create a launchd service** (`com.maxmilne.obsidian-sync.plist`) in `~/Library/LaunchAgents/`:
+### 2. Create the Launchd Service
+
+1. **Create `com.maxmilne.synctojekyll.plist`** in `~/Library/LaunchAgents/`:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.maxmilne.obsidian-sync</string>
+    <string>com.maxmilne.synctojekyll</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Volumes/aWork Drive/1. Projects/Website/obsidian_sync.sh</string>
+        <string>/Volumes/aWork Drive/1. Projects/Website/sync_to_jekyll.sh</string>
     </array>
-    <key>WatchPaths</key>
-    <array>
-        <string>/Users/maxmilne/Library/Mobile Documents/iCloud~md~obsidian/Documents/aVault/Website</string>
-    </array>
+    <key>StartInterval</key>
+    <integer>120</integer>
     <key>RunAtLoad</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/tmp/obsidian_sync.log</string>
+    <string>/tmp/sync_to_jekyll.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/obsidian_sync_error.log</string>
+    <string>/tmp/sync_to_jekyll_error.log</string>
 </dict>
 </plist>
 ```
 
-4. **Load the service**:
+### 3. Load and Start the Service
+
 ```zsh
-launchctl load -w ~/Library/LaunchAgents/com.maxmilne.obsidian-sync.plist
+launchctl load ~/Library/LaunchAgents/com.maxmilne.synctojekyll.plist
+launchctl start com.maxmilne.synctojekyll
 ```
 
-## Real-Time Updates
+### 4. Initial Synchronization
 
-- **Notes/Pages/Projects**: Changes appear instantly via symbolic links
-- **Assets**: Changes sync automatically through the background service
-- **Logs**: Check sync status at any time:
+Run the setup script to perform the first sync and configure .gitignore:
 ```zsh
-cat /tmp/obsidian_sync.log
-cat /tmp/obsidian_sync_error.log
+chmod +x setup_obsidian_sync.sh
+./setup_obsidian_sync.sh
 ```
+
+## Verification
+Check synchronization status:
+```zsh
+cat /tmp/sync_to_jekyll.log
+cat /tmp/sync_to_jekyll_error.log
+```
+
+## Maintenance
+- **Stop sync**: `launchctl unload ~/Library/LaunchAgents/com.maxmilne.synctojekyll.plist`
+- **Adjust frequency**: Edit `StartInterval` value (seconds) in the plist
+- **View logs**: Check `/tmp/sync_to_jekyll*.log` files
 
 ## Important Notes
-- The sync is one-way: Obsidian → Jekyll
-- Your Obsidian vault remains private
-- Changes made directly in Jekyll will be overwritten
+- Sync occurs automatically every 2 minutes
+- All changes flow one-way: Obsidian → Jekyll
+- Your Obsidian vault remains completely private
+- Never edit files directly in Jekyll - changes will be overwritten
