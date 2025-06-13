@@ -2,6 +2,6 @@
 layout: default
 ---
 
-<content>
+<content{% if page.id %} id="{{ page.id }}"{% endif %}>
   {{ content }}
 </content>

@@ -69,6 +69,15 @@ body {
   }
 }
 
+/* Index page content - larger text for better readability */
+#home main {
+  font-size: 1.12rem;
+
+  @media (min-width: 820px) {
+    font-size: 1.18rem;
+  }
+}
+
 ::selection {
   background-color: rgba(147, 197, 253, 0.4);
   color: var(--color-cream);
@@ -137,10 +146,6 @@ h1 + p, h2 + p, h3 + p {
   margin-bottom: var(--section-content-spacing);
   text-decoration: none !important;
   display: block;
-  
-  &:hover {
-    color: var(--color-accent-hover);
-  }
 }
 
 /* Title link - for prominent headings that are clickable */
@@ -157,6 +162,10 @@ h1 + p, h2 + p, h3 + p {
 .latest-label,
 .section-label {
   @extend .label;
+  
+  &:hover {
+    color: var(--color-accent-hover);
+  }
 }
 
 .latest-title-link {
@@ -287,6 +296,7 @@ p {
 nav {
   margin: 0;
   padding: 0;
+  font-size: 1.35rem;                      /* Next step up from body (1rem) per style guide hierarchy */
 
   .nav-container {
     display: flex;
@@ -327,7 +337,7 @@ nav {
   gap: var(--space-lg);
 
   a {
-    color: var(--color-warm-gray);
+    color: var(--color-meta);
     font-weight: var(--font-weight-normal);
     letter-spacing: 0.01em;
     transition: color 200ms ease;
