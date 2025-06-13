@@ -414,22 +414,6 @@ main {
   margin: calc(var(--section-spacing) * 1.25) 0 var(--section-spacing) 0;
 }
 
-/* Consistent content container spacing for all layouts */
-content {
-  display: block;
-  margin-top: var(--space-md);
-}
-
-article {
-  margin-top: 0;
-  margin-bottom: var(--space-lg);
-
-  h1 {
-    margin-bottom: var(--space-sm);
-    margin-top: 0;
-  }
-}
-
 footer {
   margin: var(--section-spacing) 0 var(--space-lg) 0;
   padding: var(--space-lg) 0;
@@ -468,6 +452,14 @@ time {
   letter-spacing: 0.02em;
 }
 
+article {
+  margin-bottom: var(--space-lg);
+
+  h1 {
+    margin-bottom: var(--space-sm);
+    margin-top: 0;
+  }
+}
 
 /* Images - warm presentation */
 img {
@@ -566,7 +558,7 @@ pre {
   a {
     display: grid;
     grid-template-columns: auto auto 1fr;
-    gap: var(--space-xs);
+    gap: var(--space-md);
     align-items: baseline;
     text-decoration: none !important;
     padding: 0;
