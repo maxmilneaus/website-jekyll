@@ -306,6 +306,22 @@ nav {
   }
 }
 
+.nav-breadcrumb-separator {
+  color: var(--color-warm-gray);
+  margin: 0 var(--space-xs);
+}
+
+.nav-breadcrumb-item {
+  color: var(--color-meta);
+  text-decoration: none;
+  
+  &:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
 .nav-links {
   display: flex;
   gap: var(--space-lg);
@@ -324,9 +340,9 @@ nav {
 
 /* Base link styling - all links inherit these properties */
 a {
-  color: var(--color-cream);
+  color: var(--color-meta);
   text-decoration: underline;
-  text-decoration-color: var(--color-cream);
+  text-decoration-color: var(--color-meta);
   text-underline-offset: 0.2em;
   transition: color 200ms ease, text-decoration-color 200ms ease;
 
