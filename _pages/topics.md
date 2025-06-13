@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Topics
 id: topics
 permalink: /topics
