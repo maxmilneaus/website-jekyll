@@ -1,0 +1,706 @@
+// Warm, Cozy, Mys-inspired Aesthetic with Subtle Blue Accents
+// Soft contrast, classic links with consistent highlighting
+
+:root {
+  /* Warm, softer contrast palette with subtle blue accents */
+  --color-deep: #141210;              /* Slightly lighter warm black */
+  --color-charcoal: #201d1a;          /* Warmer, lighter charcoal */
+  --color-graphite: #2d2926;          /* Softer graphite */
+  --color-stone: #4a453f;             /* Warmer stone */
+  --color-cream: #e8ddd4;             /* Softer, less bright cream */
+  --color-warm-gray: #c7beb5;        /* Warmer, softer gray */
+  --color-meta: #9c958c;              /* Between warm-gray and stone */
+  --color-accent-hover: #93c5fd;
+  --color-accent-subtle: #3b82f6;     /* Subtle blue accent */
+  --color-accent-primary: #fcd34d;
+  --color-accent-secondary: #fca5a5;
+  
+  /* System colors for consistent dividers */
+  --color-divider: var(--color-stone); /* var(--color-stone) with systematic opacity */
+  
+  /* Typography - cozy yet precise */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  
+  /* Systematic spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.75rem;
+  --space-xl: 3rem;
+  
+  /* Section rhythm variables */
+  --section-spacing: var(--space-xl);
+  --section-content-spacing: var(--space-md);
+  
+  /* Reading-optimized layout */
+  --border-radius: 3px;
+  --max-width: 42rem;           /* Match Steph's generous proportions */
+  --line-height: 1.7;          /* Slightly more generous */
+}
+
+body {
+  background: var(--color-deep);
+  color: var(--color-cream);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: 1rem;
+  line-height: var(--line-height);
+  margin: 0 auto;
+  max-width: var(--max-width);
+  padding: var(--space-xl) 2rem;
+  /* Subtle reading flow improvements */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-spacing: 0.05em;                       /* Steph-style subtle word spacing */
+
+  @media (min-width: 820px) {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 600px) {
+    line-height: 1.65;
+    padding: var(--space-lg) 4vw;
+  }
+}
+
+
+::selection {
+  background-color: rgba(147, 197, 253, 0.4);
+  color: var(--color-cream);
+}
+
+/* Typography Hierarchy - adaptive and rhythmic */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-cream);
+  line-height: 1.25;
+  margin: var(--space-lg) 0 var(--space-md) 0;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.01em;
+  /* Subtle blue glow that's more noticeable on larger headings */
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.08);
+}
+
+h1 { 
+  font-size: 2rem; 
+  font-weight: var(--font-weight-bold); 
+  margin-bottom: var(--space-lg);
+  line-height: 1.15; /* Tighter for impact */
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.12);
+}
+
+h2 { 
+  font-size: 1.65rem;
+  margin-top: calc(var(--space-xl) * 1.25); /* Extra space above for better section breaks */
+}
+
+h3 { 
+  font-size: 1.35rem; 
+  color: var(--color-warm-gray);
+  margin-top: var(--space-xl);
+  /* Slightly different spacing rhythm for h3s */
+  margin-bottom: calc(var(--space-md) * 1);
+}
+
+/* Contextual spacing - paragraphs after headings get less top margin */
+h1 + p, h2 + p, h3 + p {
+  margin-top: calc(var(--space-md) * 0.75);
+}
+
+/* =============================================================================
+   SECTION SYSTEM - Unified spacing and behavior
+   ============================================================================= */
+
+/* Base section class - all front page sections inherit this spacing */
+.section {
+  margin: 0 0 var(--section-spacing) 0;
+}
+
+.latest-section {
+  @extend .section;
+}
+
+/* =============================================================================
+   LINK SYSTEM - Unified link behavior patterns
+   ============================================================================= */
+
+/* Base label class - for all section headers */
+.label {
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-meta);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--section-content-spacing);
+  text-decoration: none !important;
+  display: block;
+}
+
+/* Title link - for prominent headings that are clickable */
+.title-link {
+  text-decoration: none !important;
+  color: var(--color-accent-subtle);
+
+  &:hover .latest-title { /* Changed .title to .latest-title */
+    color: var(--color-accent-hover);
+  }
+}
+
+/* Apply base classes to specific components */
+.latest-label,
+.section-label {
+  @extend .label;
+  
+  &:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+.latest-title-link {
+  @extend .title-link;
+}
+
+.latest-title {
+  font-size: 1.35rem;                     /* Larger for better prominence */
+  font-weight: var(--font-weight-medium); /* Medium weight for better presence */
+  color: var(--color-cream);
+  line-height: 1.35;
+  margin: 0 0 var(--space-xs) 0;
+  transition: color 0.2s ease;
+}
+
+.latest-meta {
+  font-size: 1rem;                        /* Match label and preview */
+  color: var(--color-meta);               /* Same color consistency */
+  margin-bottom: var(--space-sm);
+}
+
+.latest-preview {
+  color: var(--color-meta);               /* Same color as label/meta */
+  font-size: 1rem;                       /* Match label and meta size */
+  line-height: 1.6;
+  margin: 0 0 var(--space-md) 0;
+}
+
+.read-more {
+  display: inline;
+  margin-top: 0;
+  color: var(--color-meta);
+  font-weight: var(--font-weight-normal);      /* Normal weight like Steph */
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-cream);                  /* Subtle hover like Steph */
+  }
+}
+
+/* Section labels inherit from base label class - no separate definition needed */
+
+.topics-section,
+.writing-section {
+  @extend .section;
+  margin-top: 0; /* No top margin - spacing handled by HR and section labels */
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.topic-item {
+  margin: 0;
+}
+
+.topic-link {
+  display: inline-block;
+  background: var(--color-charcoal);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--border-radius);
+  padding: var(--space-xs) var(--space-sm);
+  text-decoration: none;
+  color: var(--color-warm-gray);
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--color-graphite);
+    border-color: var(--color-accent-subtle);
+    color: var(--color-cream);
+    transform: translateY(-1px);
+  }
+}
+
+.topic-name {
+  font-weight: var(--font-weight-medium);
+}
+
+.topic-count {
+  color: var(--color-stone);
+  margin-left: var(--space-xs);
+}
+
+/* Long paragraphs get slightly more line height for easier reading */
+p {
+  margin: var(--space-md) 0 var(--space-lg) 0;
+  color: var(--color-cream);
+}
+
+/* =============================================================================
+   NAVIGATION SYSTEM
+   ============================================================================= */
+
+/* Tag page styling - Steph Ango inspired */
+.tag-page-title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-normal);  /* Slimmer font weight */
+  margin-bottom: var(--space-sm);
+  line-height: 1.15;
+  color: var(--color-cream);              /* Tag name in cream */
+  
+  a {
+    color: var(--color-meta);             /* Topics link in meta gray */
+    text-decoration: none;
+    font-weight: var(--font-weight-normal); /* Match slimmer weight */
+    
+    &:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+}
+
+.tag-meta {
+  color: var(--color-meta);
+  font-size: 1rem;
+  margin-bottom: var(--space-xl);
+  margin-top: 0;
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;                      /* Next step up from body (1rem) per style guide hierarchy */
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  /* Navigation links have no underlines */
+  a {
+    text-decoration: none !important;
+  }
+}
+
+.nav-breadcrumb-separator {
+  color: var(--color-warm-gray);
+  margin: 0 var(--space-xs);
+}
+
+.nav-breadcrumb-item {
+  color: var(--color-meta);
+  text-decoration: none;
+  
+  &:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-lg);
+
+  a {
+    color: var(--color-meta);
+    font-weight: var(--font-weight-normal);
+    letter-spacing: 0.01em;
+    transition: color 200ms ease;
+    
+    &:hover {
+      color: var(--color-accent-hover) !important;
+    }
+  }
+}
+
+/* Base link styling - all links inherit these properties */
+a {
+  color: var(--color-meta);
+  text-decoration: underline;
+  text-decoration-color: var(--color-meta);
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: none;
+  transition: color 200ms ease, text-decoration-color 200ms ease;
+
+  &:hover {
+    color: var(--color-accent-hover);
+    text-decoration-color: var(--color-accent-hover);
+  }
+}
+
+/* Internal links inherit base styling - no separate definition needed */
+.internal-link {
+  /* Inherits all base link styles */
+}
+
+/* External link styling */
+a {
+  /* Only external links (not internal-link class, not same-site relative URLs) get arrow and italic styling */
+  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]):not(.nav-links a):after {
+    content: "↗";
+    position: relative;
+    top: -0.3em;
+    font-size: 0.7em;
+    color: var(--color-warm-gray);
+    margin-left: 0.1em;
+    text-decoration: none;  /* Remove underline from arrow */
+  }
+
+  /* Only external links are italic */
+  &:not(.internal-link):not([href^="/"]):not([href^="#"]):not([href^="."]):not([href*="/projects/"]):not(.nav-links a) {
+    font-style: italic;
+  }
+
+  &.footnote:after,
+  &.reversefootnote:after {
+    content: "";
+  }
+}
+
+/* Site title - consistent highlighting */
+.site-title a {
+  color: var(--color-cream);
+  font-weight: 300;                        /* Lighter than nav links (400) for distinction */
+  text-decoration: none;
+  transition: color 200ms ease;
+  padding: 0;                              /* Remove padding for cleaner look */
+  margin: 0;
+
+  &:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+/* Clean focus state */
+*:focus {
+  outline: 2px solid var(--color-accent-subtle);
+  outline-offset: 2px;
+  background: var(--color-charcoal) !important;
+  color: var(--color-cream) !important;
+}
+
+/* =============================================================================
+   LAYOUT CONTAINERS
+   ============================================================================= */
+
+main {
+  margin: calc(var(--section-spacing) * 1.25) 0 var(--section-spacing) 0;
+}
+
+footer {
+  margin: var(--section-spacing) 0 var(--space-lg) 0;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-divider);
+  color: var(--color-warm-gray);
+  font-size: 0.9rem;
+}
+
+/* Goldsworthy Fragments - animations moved to _animations.scss */
+.stove-signature {
+  text-align: left; /* Changed from center to left */
+  margin: var(--space-xl) 0 var(--space-md) 0;
+}
+
+/* =============================================================================
+   CONTENT ELEMENTS - Typography and spacing
+   ============================================================================= */
+
+/* Standard lists (not article lists) */
+ol {
+  margin: var(--space-md) 0 var(--space-lg) 0;
+  padding-left: var(--space-lg);
+
+  li {
+    margin: var(--space-sm) 0;
+    color: var(--color-cream);
+  }
+}
+
+time {
+  display: block;
+  color: var(--color-warm-gray);
+  margin: var(--space-sm) 0 var(--space-lg);
+  font-size: 0.85rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.02em;
+}
+
+article {
+  margin-bottom: var(--space-lg);
+
+  h1 {
+    margin-bottom: var(--space-sm);
+    margin-top: 0;
+  }
+}
+
+/* Images - warm presentation */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  margin: var(--space-lg) auto;
+  display: block;
+  max-height: 75vh;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Blockquotes - subtle, spacious */
+blockquote {
+  border-left: 2px solid var(--color-divider);
+  margin: var(--space-xl) 0;
+  padding-left: var(--space-lg);
+  font-style: italic;
+  color: var(--color-warm-gray);
+  p { margin: 0; }
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  height: 1px;
+  margin: var(--section-spacing) 0;
+  background: var(--color-divider);
+}
+
+.section-divider {
+  @extend hr;
+  margin-top: 0; /* Remove top margin to prevent double spacing */
+  margin-bottom: var(--section-spacing);
+}
+
+/* Code - warm, functional */
+code {
+  font-family: var(--font-mono);
+  background: var(--color-charcoal);
+  color: var(--color-warm-gray);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--color-charcoal);
+  color: var(--color-cream);
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+  margin: var(--space-md) 0 var(--space-lg) 0;
+}
+
+/* Layout consistency - removed old grid constraints */
+
+.backlink-box {
+  background: transparent;
+  padding: var(--space-sm);
+  border-radius: var(--border-radius);
+  border-left: 2px solid var(--color-divider);
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+/* Invalid links - subtle, unobtrusive */
+.invalid-link {
+  color: var(--color-warm-gray);
+  background: var(--color-charcoal);
+  padding: 0 var(--space-xs);
+  border-radius: var(--border-radius);
+  cursor: help;
+}
+
+.invalid-link-brackets {
+  color: var(--color-stone);
+  cursor: help;
+}
+
+/* =============================================================================
+   ARTICLE LIST SYSTEM - Writing section grid layout
+   ============================================================================= */
+
+/* Article list container */
+.article-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: var(--space-md);
+    align-items: baseline;
+    text-decoration: none !important;
+    padding: 0;
+
+    &:hover .article-title {
+      color: var(--color-accent-hover);
+      text-decoration-color: var(--color-accent-hover);
+    }
+  }
+}
+
+.article-date {
+  font-family: var(--font-mono);
+  color: var(--color-meta);
+  font-size: 0.9em;
+  text-decoration: none !important;
+}
+
+.article-separator {
+  color: var(--color-stone);
+  text-decoration: none !important;
+}
+
+.article-title {
+  color: var(--color-cream);
+  text-decoration: underline;
+  text-decoration-color: var(--color-stone);
+  text-underline-offset: 0.15em;
+  transition: color 200ms ease, text-decoration-color 200ms ease;
+}
+
+/* Apply article list class to writing section ul */
+ul {
+  @extend .article-list;
+}
+
+/* =============================================================================
+   EMBEDDINGS RECOMMENDATIONS - "You might also enjoy" component
+   ============================================================================= */
+
+.you-might-enjoy {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-divider);
+  
+  h3 {
+    font-size: 1.35rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-warm-gray);
+    margin: 0 0 var(--space-md) 0;
+    line-height: 1.25;
+  }
+  
+  .recommendations-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin: var(--space-sm) 0;
+      
+      a {
+        color: var(--color-stone);
+        text-decoration: underline;
+        text-decoration-color: var(--color-stone);
+        text-underline-offset: 0.2em;
+        transition: color 200ms ease, text-decoration-color 200ms ease;
+        
+        &:hover {
+          color: var(--color-accent-hover);
+          text-decoration-color: var(--color-accent-hover);
+        }
+      }
+    }
+  }
+  
+  .similarity-score {
+    color: var(--color-meta);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-normal);
+    margin-left: var(--space-xs);
+    opacity: 0.7;
+  }
+}
+
+/* --- PROJECTS PAGE GRID --- */
+.projects-grid {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-xl) 0;
+  display: grid;
+  grid-template-columns: 1fr; /* 1 column on mobile */
+  gap: var(--space-lg);
+}
+
+/* On larger screens, switch to a 2-column grid */
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  display: block; /* Makes the entire card a clickable area */
+  text-decoration: none;
+  color: var(--color-cream);
+  background-color: var(--color-charcoal);
+  border: 1px solid var(--color-graphite);
+  border-radius: var(--border-radius);
+  transition: transform 200ms ease, border-color 200ms ease;
+  overflow: hidden; /* Ensures image corners are rounded */
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent-hover);
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--color-graphite);
+  margin: 0;
+  border-radius: 0; /* Image itself has no radius */
+}
+
+.project-card-content {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.project-card h3 {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 1.25rem;
+  color: var(--color-cream);
+}
+
+.project-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-warm-gray);
+  line-height: 1.6;
+}
+
